@@ -1,5 +1,7 @@
 package com.example.capstone;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -18,7 +20,6 @@ import com.example.capstone.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    Locations Burke = new Locations("burke", 123.123,123.123,"singes dorm", "nathan and jackson lived there last year");
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        BuildingDB buildingDB = new BuildingDB(this);
+        SQLiteDatabase db = buildingDB.getWritableDatabase();
+
 
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
