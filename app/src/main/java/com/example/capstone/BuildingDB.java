@@ -1,11 +1,18 @@
 package com.example.capstone;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.capstone.ui.home.HomeFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BuildingDB extends SQLiteOpenHelper {
 
@@ -20,8 +27,12 @@ public class BuildingDB extends SQLiteOpenHelper {
     public static final String ID = "ID";
 
 
-    public BuildingDB(@Nullable Context context) {
+    public BuildingDB(@Nullable MainActivity context) {
         super(context, "buildindInfo.db",  null, 1);
+    }
+
+    public BuildingDB(@Nullable Fragment fragment) {
+        super(fragment.getContext(), "buildindInfo.db",  null, 1);
     }
 
     @Override
@@ -36,12 +47,49 @@ public class BuildingDB extends SQLiteOpenHelper {
                 BUILDING_HISTORY + " TEXT, " +
                 BUILDING_NICKNAME + " TEXT)";
 
-        Log.d("BuildingDB", "onCreate() called  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+
         db.execSQL(createTableStatement);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+    }
+
+    public List<BuildingModel> showbuildings(){
+        Log.d("BuildingDB", "showbuildings() method called");
+        List<BuildingModel> returnlist = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + BUILDING_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null, null);
+
+        if (cursor.moveToFirst()){
+            //loop through the cursor and create new building objects put them into return list
+            do {
+                int buildingID = cursor.getInt(0);
+                String buildingName = cursor.getString(1);
+                String buildingAddress = cursor.getString(2);
+                Double buildingLatitude = cursor.getDouble(3);
+                Double buildingLongitude = cursor.getDouble(4);
+                String buildingInfo = cursor.getString(5);
+                String buildingHistory = cursor.getString(6);
+                String buildingNickname = cursor.getString(7);
+
+                BuildingModel newBuilding = new BuildingModel(buildingID, buildingName, buildingAddress, buildingLatitude, buildingLongitude, buildingInfo, buildingHistory, buildingNickname);
+                returnlist.add(newBuilding);
+
+            } while (cursor.moveToNext());
+        }
+        else{
+            //failed, do not add anything to the list
+        }
+
+        cursor.close();
+        db.close();
+        Log.d("BuildingDB", "showbuildings() returned: " + returnlist.toString());
+        return returnlist;
     }
 }

@@ -9,6 +9,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    //add strings for each of the building names
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="google_maps_key">AIzaSyBsCrtNTpK9xTC-0hpMUNe5bQ9bXBohHY0</string>
 
 </resources>
