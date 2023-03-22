@@ -11,6 +11,9 @@
     <string name="menu_slideshow">Slideshow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="google_maps_key">AIzaSyBsCrtNTpK9xTC-0hpMUNe5bQ9bXBohHY0</string>
+    <string name="google_maps_key">AIzaSyD_5pBqb77GQLzZl28uyxukgfeG-9ETqBs</string>
+
+
+    // sha 1 key 9B:68:49:87:06:B4:33:32:61:BF:89:D3:4B:1C:08:D5:88:C7:58:0E
 
 </resources>
