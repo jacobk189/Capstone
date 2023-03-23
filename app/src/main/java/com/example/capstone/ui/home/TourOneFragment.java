@@ -1,6 +1,7 @@
 package com.example.capstone.ui.home;
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -49,6 +50,7 @@ public class TourOneFragment extends Fragment {
 
     private FragmentTourOneBinding binding;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    BluetoothAdapter ba;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
