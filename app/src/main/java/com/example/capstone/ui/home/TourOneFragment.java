@@ -81,7 +81,7 @@ public class TourOneFragment extends Fragment {
 
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 GoogleMap mMap = googleMap;
-                LatLng location = new LatLng(buildingList.get(1).getLatitude(), buildingList.get(1).getLongitude());
+                LatLng location = new LatLng(buildingList.get(0).getLatitude(), buildingList.get(0).getLongitude());
 
                 MarkerOptions markerOptions = new MarkerOptions()
                         .position(location)
@@ -95,6 +95,7 @@ public class TourOneFragment extends Fragment {
 
                     if (myLocation != null) {
                         // Use the user's current location to set the origin of the directions request
+                        Log.d("In permission check:", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         LatLng destination = new LatLng(buildingList.get(9).getLatitude(), buildingList.get(9).getLongitude());
                         DirectionsApiRequest directions = DirectionsApi.newRequest(geoApiContext);
@@ -106,11 +107,13 @@ public class TourOneFragment extends Fragment {
                             public void onResult(DirectionsResult result) {
                                 // Handle the directions result here
                                 // You can access the steps of the directions with result.routes[0].legs[0].steps
+                                Log.d("inside onresult", "here");
                             }
 
                             @Override
                             public void onFailure(Throwable e) {
                                 // Handle the failure here
+                                Log.d("inside onfailure", "here");
                             }
                         });
 
