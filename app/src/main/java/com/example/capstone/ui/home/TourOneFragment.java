@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -35,6 +36,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
@@ -44,6 +46,7 @@ import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.TravelMode;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TourOneFragment extends Fragment {
@@ -51,6 +54,7 @@ public class TourOneFragment extends Fragment {
     private FragmentTourOneBinding binding;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     BluetoothAdapter ba;
+    //GoogleMap mMap = googleMap;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -98,30 +102,7 @@ public class TourOneFragment extends Fragment {
                         Log.d("In permission check:", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         LatLng destination = new LatLng(buildingList.get(9).getLatitude(), buildingList.get(9).getLongitude());
-                        DirectionsApiRequest directions = DirectionsApi.newRequest(geoApiContext);
-                        directions.origin(new com.google.maps.model.LatLng(origin.latitude, origin.longitude));
-                        directions.destination(new com.google.maps.model.LatLng(destination.latitude, destination.longitude));
-                        directions.mode(TravelMode.DRIVING); // Set the travel mode to driving
-                        directions.setCallback(new PendingResult.Callback<DirectionsResult>() {
-                            @Override
-                            public void onResult(DirectionsResult result) {
-                                // Handle the directions result here
-                                // You can access the steps of the directions with result.routes[0].legs[0].steps
-                                Log.d("inside onresult", "here");
-                            }
-
-                            @Override
-                            public void onFailure(Throwable e) {
-                                // Handle the failure here
-                                Log.d("inside onfailure", "here");
-                            }
-                        });
-
-                        /*try {
-                            directions.await();
-                        } catch (ApiException | InterruptedException | IOException e) {
-                            throw new RuntimeException(e);
-                        }*/
+                        getDirections(origin,destination, mMap);
 
                     } else {
                         // Handle the case where the user's location is not available
@@ -153,5 +134,43 @@ public class TourOneFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void getDirections(LatLng origin, LatLng destination, GoogleMap mMap) {
+        // Create a new instance of the Directions API
+        GeoApiContext context = new GeoApiContext.Builder().apiKey(getString(R.string.google_maps_key)).build();
+
+        // Create a new Directions API request
+        DirectionsApiRequest request = DirectionsApi.newRequest(context)
+                .origin(new com.google.maps.model.LatLng(origin.latitude, origin.longitude))
+                .destination(new com.google.maps.model.LatLng(destination.latitude, destination.longitude))
+                .mode(TravelMode.DRIVING);
+
+        // Execute the request asynchronously
+        request.setCallback(new PendingResult.Callback<DirectionsResult>() {
+            @Override
+            public void onResult(DirectionsResult result) {
+                // Draw the route on the map
+                Log.d("in onresult of get directions", ";)");
+                List<LatLng> path = new ArrayList<>();
+                for (com.google.maps.model.LatLng latLng : result.routes[0].overviewPolyline.decodePath()) {
+                    path.add(new LatLng(latLng.lat, latLng.lng));
+                }
+                PolylineOptions polylineOptions = new PolylineOptions().addAll(path).color(Color.BLUE).width(5f);
+                mMap.addPolyline(polylineOptions);
+            }
+
+            @Override
+            public void onFailure(Throwable e) {
+                // Handle the error here
+                Log.d("in failure of get directions", ";(");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), "Failed to get directions", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 }
