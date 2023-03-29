@@ -50,6 +50,8 @@ public class TourOneFragment extends Fragment {
     private List<LatLng> directions = null;
 
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -65,6 +67,8 @@ public class TourOneFragment extends Fragment {
             supportMapFragment = SupportMapFragment.newInstance();
             getChildFragmentManager().beginTransaction().add(mapContainer.getId(), supportMapFragment).commit();
         }
+
+        Log.d("&&&&&&&&&", "inside of touronefragment");
 
         BuildingDB buildingDB = new BuildingDB(TourOneFragment.this);
         List<BuildingModel> buildingList = buildingDB.showbuildings();
@@ -99,12 +103,13 @@ public class TourOneFragment extends Fragment {
                             @Override
                             public void onDirectionsReceived(List<LatLng> directions) {
                                 Log.d("Directions returned", directions.toString());
-                                PolylineOptions polylineOptions = new PolylineOptions().addAll(directions).color(Color.BLUE).width(5f);
+                                List<LatLng> work = directions;
+                                /*PolylineOptions polylineOptions = new PolylineOptions().addAll(directions).color(Color.BLUE).width(5f);
                                 Log.d("on directionsreceived", "1");
                                 googleMap.addPolyline(polylineOptions);
                                 Log.d("on directionsreceived", "2");
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 14));
-                                Log.d("on directionsreceived", "3");
+                                Log.d("on directionsreceived", "3");*/
                             }
                         });
 

@@ -7,14 +7,159 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home_48px"
-            android:title="Main" />
+            android:title="Home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/Mary_Minahan_McCormick_Hall"
             android:icon="@drawable/apartment_48px"
-            android:title="3M" />
+            android:title="Mary Minahan McCormick Hall" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/Gertrude_S_Bergstrom_Hall"
             android:icon="@drawable/corporate_fare_48px"
-            android:title="GMS" />
+            android:title="Gertrude S Bergstrom Hall" />
+
+        <item android:id="@+id/Madelaine_and_Lorraine_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Madelaine and Lorraine Hall" />
+
+        <item android:id="@+id/Gehl_Mulva_Science_Center"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Gehl-Mulva Science Center" />
+
+        <item android:id="@+id/Medical_College_of_Wisconsin"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Medical College of Wisconsin" />
+
+        <item android:id="@+id/St_Joseph_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="St Joseph Hall" />
+
+        <item android:id="@+id/Old_St_Joseph_Church"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Old St Joseph Church" />
+
+        <item android:id="@+id/Francis_H_Boyle_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Boyle Hall" />
+
+        <item android:id="@+id/Heating_Plant"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Heating Plant" />
+
+        <item android:id="@+id/Main_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Main Hall" />
+
+        <item android:id="@+id/Ray_Van_Dan_Heuvel_Family_Campus_Center"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Campus Center" />
+
+        <item android:id="@+id/Frank_J_Sensenbrenner_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Sensenbrenner Hall" />
+
+        <item android:id="@+id/Dennis_M_Burke_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Burke Hall" />
+
+        <item android:id="@+id/Thomas_and_Maureen_Manion_Townhouse_Village"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Townhouse Village" />
+
+        <item android:id="@+id/Ralph_and_Catherine_Paulson_Carriage"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Carriage House" />
+
+        <item android:id="@+id/Mulva_Family_Fitness_and_Sports_Center"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Mulva Fitness Center" />
+
+        <item android:id="@+id/Victor_McCormick_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Victor McCormick Hall" />
+
+        <item android:id="@+id/Michels_Commons"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Michels Commons" />
+
+        <item android:id="@+id/Carol_and_Robert_Busch_Art_Center"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Busch Art Center" />
+
+        <item android:id="@+id/Abbot_Pennings_Hall_of_Fine_Arts"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Pennings Fall of Fine Arts" />
+
+        <item android:id="@+id/Todd_Wehr_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Todd Wehr Hall/Bookstore" />
+
+        <item android:id="@+id/FK_Bemis_International_Center"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Bemis International Center" />
+
+        <item android:id="@+id/Austin_E_Cofrin_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Cofrin Hall" />
+
+        <item android:id="@+id/Pennings_Activity_Center"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Pennings Activity Center" />
+
+        <item android:id="@+id/George_F_Kress_Residence_for_Executive_Education"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Kress Inn" />
+
+        <item android:id="@+id/Cassandra_Voss_Center"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Cassandra Voss Center" />
+
+        <item android:id="@+id/Rev_Ignatius_Francis_Van_Dyke_Alumni_House"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Alumni House" />
+
+        <item android:id="@+id/Ariens_Family_Welcome_Center"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Ariens Welcome Center" />
+
+        <item android:id="@+id/Miriam_B_and_James_J_Mulva_Library"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Mulva Library" />
+
+        <item android:id="@+id/Grounds_Facility"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Grounds Facility" />
+
+        <item android:id="@+id/Fr_Eugene_E_Gries_OPraem_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Gries Hall" />
+
+        <item android:id="@+id/Dale_and_Ruths_Michels_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Michels Hall" />
+
+        <item android:id="@+id/Dudley_Birder_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Birder Hall" />
+
+        <item android:id="@+id/Roggenburg_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Roggenburg Hall" />
+
+        <item android:id="@+id/Hugh_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Hugh Hall" />
+
+        <item android:id="@+id/Doksany_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Doksany Hall" />
+
+        <item android:id="@+id/Premontre_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Premontre Hall" />
+
+        <item android:id="@+id/Xanten_Hall"
+            android:icon="@drawable/corporate_fare_48px"
+            android:title="Xanten Hall" />
+
     </group>
 </menu>

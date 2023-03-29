@@ -3,6 +3,7 @@ package com.example.capstone;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
@@ -35,11 +36,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
+        Log.d("&&&&&&&&&", "inside of main activity");
 
         BuildingDB buildingDB = new BuildingDB(this);
         SQLiteDatabase db = buildingDB.getWritableDatabase();
-
 
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {

@@ -72,6 +72,8 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        Log.d("&&&&&&&&&", "inside of homefragment");
+
         testbutton = root.findViewById(R.id.tour1button);
         btCheckbox = root.findViewById(R.id.btCheckbox);
 
