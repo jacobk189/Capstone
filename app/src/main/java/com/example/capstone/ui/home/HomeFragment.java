@@ -45,7 +45,8 @@ import java.util.Set;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private Button testbutton;
+    private Button tourOneButton;
+    private Button tourTwoButton;
     private CheckBox btCheckbox;
     private static final int REQUEST_ENABLE_BT = 1;
     private BluetoothAdapter bluetoothAdapter;
@@ -74,7 +75,8 @@ public class HomeFragment extends Fragment {
 
         Log.d("&&&&&&&&&", "inside of homefragment");
 
-        testbutton = root.findViewById(R.id.tour1button);
+        tourOneButton = root.findViewById(R.id.tour1button);
+        tourTwoButton = root.findViewById(R.id.tour2button);
         btCheckbox = root.findViewById(R.id.btCheckbox);
 
         //BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(BluetoothManager.class);
@@ -98,14 +100,27 @@ public class HomeFragment extends Fragment {
         bluetoothReceiver = new BluetoothReceiver();
         getActivity().registerReceiver(bluetoothReceiver, filter);
 
-        testbutton.setOnClickListener(new View.OnClickListener() {
+        tourOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TourOneFragment tourone = new TourOneFragment();
+                TourOneFragment tourOne = new TourOneFragment();
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourone);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourOne);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        tourTwoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TourTwoFragment tourTwo = new TourTwoFragment();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourTwo);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
