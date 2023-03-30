@@ -29,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -84,13 +85,27 @@ public class TourOneFragment extends Fragment {
                 mMap = googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+                /*Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
+                        .clickable(true)
+                        .add(
+                                new LatLng(-35.016, 143.321),
+                                new LatLng(-34.747, 145.592),
+                                new LatLng(-34.364, 147.891),
+                                new LatLng(-33.501, 150.217),
+                                new LatLng(-32.306, 149.248),
+                                new LatLng(-32.491, 147.309)));
+
+                // Position the map's camera near Alice Springs in the center of Australia,
+                // and set the zoom factor so most of Australia shows on the screen.
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-23.684, 133.903), 4));*/
+
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     // Permission is granted, get the user's current location
                     googleMap.setMyLocationEnabled(true);
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 16));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 15));
 
                     if (myLocation != null) {
                         // Use the user's current location to set the origin of the directions request
@@ -98,18 +113,33 @@ public class TourOneFragment extends Fragment {
                         //LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         LatLng origin = new LatLng(buildingList.get(6).getLatitude(), buildingList.get(6).getLongitude());
                         LatLng destination = new LatLng(buildingList.get(1).getLatitude(), buildingList.get(1).getLongitude());
-                        Log.d("Your Location", destination.toString());
+                        Log.d("origin", origin.toString());
+                        Log.d("destination", destination.toString());
                         getDirections(origin, destination, new DirectionsCallback() {
                             @Override
                             public void onDirectionsReceived(List<LatLng> directions) {
                                 Log.d("Directions returned", directions.toString());
-                                List<LatLng> work = directions;
-                                /*PolylineOptions polylineOptions = new PolylineOptions().addAll(directions).color(Color.BLUE).width(5f);
+                                PolylineOptions polylineOptions = new PolylineOptions().addAll(directions).color(Color.BLUE).width(5f);
+                                Log.d("polyline options", polylineOptions.getPoints().toString());
                                 Log.d("on directionsreceived", "1");
+                                Log.d("mmap", mMap.toString());
                                 googleMap.addPolyline(polylineOptions);
                                 Log.d("on directionsreceived", "2");
-                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 14));
-                                Log.d("on directionsreceived", "3");*/
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 14));
+                                Log.d("on directionsreceived", "3");
+                                /*Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
+                                        .clickable(true)
+                                        .add(
+                                                new LatLng(-35.016, 143.321),
+                                                new LatLng(-34.747, 145.592),
+                                                new LatLng(-34.364, 147.891),
+                                                new LatLng(-33.501, 150.217),
+                                                new LatLng(-32.306, 149.248),
+                                                new LatLng(-32.491, 147.309)));
+
+                                // Position the map's camera near Alice Springs in the center of Australia,
+                                // and set the zoom factor so most of Australia shows on the screen.
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-23.684, 133.903), 4));*/
                             }
                         });
 
@@ -123,6 +153,22 @@ public class TourOneFragment extends Fragment {
                     // Permission is not granted, request it from the user
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
+
+
+
+               /* Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
+                        .clickable(true)
+                        .add(
+                                new LatLng(-35.016, 143.321),
+                                new LatLng(-34.747, 145.592),
+                                new LatLng(-34.364, 147.891),
+                                new LatLng(-33.501, 150.217),
+                                new LatLng(-32.306, 149.248),
+                                new LatLng(-32.491, 147.309)));
+
+                // Position the map's camera near Alice Springs in the center of Australia,
+                // and set the zoom factor so most of Australia shows on the screen.
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-23.684, 133.903), 4));*/
 
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
@@ -191,6 +237,7 @@ public class TourOneFragment extends Fragment {
             public void onFailure(Throwable e) {
                 // Handle the error here
                 Log.d("in failure of get directions", ";(");
+                Log.d("in on failure", e.toString());
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
