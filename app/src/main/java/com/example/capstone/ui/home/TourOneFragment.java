@@ -18,12 +18,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
 import com.example.capstone.R;
 import com.example.capstone.databinding.FragmentTourOneBinding;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -98,11 +101,41 @@ public class TourOneFragment extends Fragment {
                         // Use the user's current location to set the origin of the directions request
                         Log.d("Inside location not null", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-                        LatLng destination = new LatLng(buildingList.get(11).getLatitude(), buildingList.get(11).getLongitude());
+                        //LatLng destination = new LatLng(buildingList.get(11).getLatitude(), buildingList.get(11).getLongitude());
+                        LatLng destination = new LatLng(44.444648402445374, -88.07028337312235);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
 
                         getDirections(origin,destination,googleMap);
+
+                        LocationListener locationListener = new LocationListener() {
+                            @Override
+                            public void onLocationChanged(Location location) {
+                                Log.d("Inside on location changed", "location");
+                                float[] distance = new float[2];
+                                //LatLng destination = new LatLng(-34, 151); // Replace with your destination location
+                                LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                                Log.d("Inside on location changed", currentLocation.toString());
+
+                                Location.distanceBetween(destination.latitude, destination.longitude,
+                                        currentLocation.latitude, currentLocation.longitude, distance);
+
+                                if (distance[0] < 100) { // Replace 100 with your desired distance threshold
+                                    Log.d("Inside on location changed", distance.toString());
+                                    // Open new fragment
+                                    HomeFragment home = new HomeFragment();
+                                    FragmentManager fragmentManager = getParentFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                    fragmentTransaction.replace(R.id.nav_host_fragment_content_main, home);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+
+                                    // Remove location updates
+                                    //locationManager.removeUpdates(getContext());
+                                }
+                            }
+                        };
 
                         /*getDirections(origin, destination,googleMap, new DirectionsCallback() {
                             @Override

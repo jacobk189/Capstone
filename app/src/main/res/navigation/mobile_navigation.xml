@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/Abbot_Pennings_Hall_of_Fine_Arts"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
