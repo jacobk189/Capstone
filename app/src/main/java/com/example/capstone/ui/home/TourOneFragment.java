@@ -61,7 +61,6 @@ public class TourOneFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentTourOneBinding.inflate(inflater, container, false);
-        //View root = binding.getRoot();
         View root = inflater.inflate(R.layout.fragment_tour_one, container, false);
         FrameLayout mapContainer = root.findViewById(R.id.m_container);
 
@@ -157,6 +156,15 @@ public class TourOneFragment extends Fragment {
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
+
+                        InfoFragment infoFragment = new InfoFragment();
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, infoFragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+
 
                     }
                 });
