@@ -15,19 +15,19 @@
             <menu>
 
                 <item
-                    android:id="@+id/Abbot_Pennings_Hall_of_Fine_Arts"
+                    android:id="@+id/Francis_H_Boyle_Hall"
                     android:icon="@drawable/corporate_fare_48px"
-                    android:title="Pennings Fall of Fine Arts" />
-
-                <item
-                    android:id="@+id/Austin_E_Cofrin_Hall"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Cofrin Hall" />
+                    android:title="Boyle Hall" />
 
                 <item
                     android:id="@+id/Carol_and_Robert_Busch_Art_Center"
                     android:icon="@drawable/corporate_fare_48px"
                     android:title="Busch Art Center" />
+
+                <item
+                    android:id="@+id/Austin_E_Cofrin_Hall"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Cofrin Hall" />
 
                 <item
                     android:id="@+id/Gehl_Mulva_Science_Center"
@@ -44,6 +44,10 @@
                     android:icon="@drawable/corporate_fare_48px"
                     android:title="Mulva Library" />
 
+                <item
+                    android:id="@+id/Abbot_Pennings_Hall_of_Fine_Arts"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Pennings Fall of Fine Arts" />
 
             </menu>
         </item>
