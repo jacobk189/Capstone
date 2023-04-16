@@ -7,9 +7,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +39,9 @@ import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
 import com.example.capstone.R;
 import com.example.capstone.databinding.FragmentHomeBinding;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
 
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
 
@@ -73,11 +79,10 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Log.d("&&&&&&&&&", "inside of homefragment");
+        Log.d("&&&&&&&&&", "inside of homefragment 1");
 
         tourOneButton = root.findViewById(R.id.tour1button);
         tourTwoButton = root.findViewById(R.id.tour2button);
-        btCheckbox = root.findViewById(R.id.btCheckbox);
 
         //BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(BluetoothManager.class);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -97,12 +102,26 @@ public class HomeFragment extends Fragment {
             }
         }*/
 
+        if (getArguments() != null) {
+            Log.d("Inside get arugment not null", "");
+            Fragment callingFragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+            Log.d("callingFragment class", callingFragment.getClass().getSimpleName());
+            if (callingFragment instanceof HomeFragment) {
+                String message = getArguments().getString("Finished");
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        }
+
         bluetoothReceiver = new BluetoothReceiver();
         getActivity().registerReceiver(bluetoothReceiver, filter);
+
+        Log.d("&&&&&&&&&", "inside of homefragment 2");
+
 
         tourOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("&&&&&&&&&", "inside of homefragment 3");
                 TourOneFragment tourOne = new TourOneFragment();
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

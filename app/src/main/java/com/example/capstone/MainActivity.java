@@ -54,7 +54,15 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.Abbot_Pennings_Hall_of_Fine_Arts, R.id.nav_slideshow)
+                R.id.nav_home, R.id.Abbot_Pennings_Hall_of_Fine_Arts, R.id.Francis_H_Boyle_Hall, R.id.Carol_and_Robert_Busch_Art_Center,
+                R.id.Austin_E_Cofrin_Hall, R.id.Gehl_Mulva_Science_Center, R.id.Medical_College_of_Wisconsin, R.id.Miriam_B_and_James_J_Mulva_Library,
+                R.id.Dudley_Birder_Hall, R.id.Cassandra_Voss_Center, R.id.Old_St_Joseph_Church, R.id. Rev_Ignatius_Francis_Van_Dyke_Alumni_House,
+                R.id.Ray_Van_Dan_Heuvel_Family_Campus_Center, R.id. Michels_Commons, R.id.Mulva_Family_Fitness_and_Sports_Center, R.id.Pennings_Activity_Center,
+                R.id.Dennis_M_Burke_Hall, R.id.Ralph_and_Catherine_Paulson_Carriage, R.id.Doksany_Hall, R.id.Gertrude_S_Bergstrom_Hall, R.id.Madelaine_and_Lorraine_Hall,
+                R.id.Mary_Minahan_McCormick_Hall, R.id.Frank_J_Sensenbrenner_Hall, R.id.Fr_Eugene_E_Gries_OPraem_Hall, R.id.Hugh_Hall, R.id.Dale_and_Ruths_Michels_Hall,
+                R.id.Premontre_Hall, R.id.Roggenburg_Hall, R.id.St_Joseph_Hall, R.id.Thomas_and_Maureen_Manion_Townhouse_Village, R.id.Victor_McCormick_Hall, R.id.Xanten_Hall,
+                R.id.Ariens_Family_Welcome_Center, R.id.FK_Bemis_International_Center, R.id.Main_Hall, R.id.Todd_Wehr_Hall, R.id.Heating_Plant, R.id.George_F_Kress_Residence_for_Executive_Education,
+                R.id.Grounds_Facility)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

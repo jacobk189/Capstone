@@ -44,17 +44,29 @@ public class InfoFragment extends Fragment {
 
         Bundle receive = getArguments();
         int count = receive.getInt("Tour counter");
-        Toast.makeText(getContext(), "This is the count: "+count, Toast.LENGTH_SHORT).show();
-        count += 1;
+        //Toast.makeText(getContext(), "This is the count: "+count, Toast.LENGTH_SHORT).show();
 
-        BuildingDB buildingDB = new BuildingDB(InfoFragment.this);
-        List<BuildingModel> buildingList = buildingDB.showbuildings();
+
+        List<BuildingModel> tourList = receive.getParcelableArrayList("tourList");
 
         continueButton = root.findViewById(R.id.continueButton);
-        int nextCount = count;
+        int nextCount = count + 1;
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Log.d("List size", String.valueOf(tourList.size()));
+                Log.d("Next count", String.valueOf(nextCount));
+
+                /*if (nextCount >= tourList.size()){
+                    HomeFragment homeFragment = new HomeFragment();
+                    FragmentManager fragmentManager = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment_content_main, homeFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }*/
+
                 Bundle test = new Bundle();
                 test.putInt("Next Count", nextCount);
 
@@ -71,7 +83,7 @@ public class InfoFragment extends Fragment {
 
         buildingName = root.findViewById(R.id.Name);
 
-        buildingName.setText(buildingList.get(0).getName()+" "+buildingList.get(0).getID());
+        buildingName.setText(tourList.get(count).getName()+" "+tourList.get(count).getID());
 
 
         return root;

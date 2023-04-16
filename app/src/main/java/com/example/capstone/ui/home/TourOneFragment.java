@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +84,8 @@ public class TourOneFragment extends Fragment {
                 Log.d("Inside infofragment called this", "");
                 int newCount = getArguments().getInt("Next Count");
                 count = newCount;
-                Toast.makeText(getContext(), "This is the count: "+count, Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(getContext(), "This is the count: "+count, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -91,6 +93,20 @@ public class TourOneFragment extends Fragment {
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
         List<BuildingModel> academicTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
+
+        if (count >= academicTour.size()){
+            count = 0;
+            String completed = "Academic Tour Completed";
+            HomeFragment homeFragment = new HomeFragment();
+            Bundle completedTour = new Bundle();
+            completedTour.putString("Finished",completed);
+            homeFragment.setArguments(completedTour);
+            FragmentManager fragmentManager = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main, homeFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
 
         String apiKey = getString(R.string.google_maps_key);
 
@@ -117,7 +133,7 @@ public class TourOneFragment extends Fragment {
                         // Use the user's current location to set the origin of the directions request
                         Log.d("Inside location not null", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-                        LatLng destination = new LatLng(academicTour.get(0).getLatitude(), academicTour.get(0).getLongitude());
+                        LatLng destination = new LatLng(academicTour.get(count).getLatitude(), academicTour.get(count).getLongitude());
                         //LatLng destination = new LatLng(44.444648402445374, -88.07028337312235);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
@@ -174,11 +190,12 @@ public class TourOneFragment extends Fragment {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
 
-                        Bundle test = new Bundle();
-                        test.putInt("Tour counter",count);
+                        Bundle tourOne = new Bundle();
+                        tourOne.putInt("Tour counter",count);
+                        tourOne.putParcelableArrayList("tourList", (ArrayList<? extends Parcelable>) new ArrayList<BuildingModel>(academicTour));
 
                         InfoFragment infoFragment = new InfoFragment();
-                        infoFragment.setArguments(test);
+                        infoFragment.setArguments(tourOne);
                         FragmentManager fragmentManager = getParentFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
