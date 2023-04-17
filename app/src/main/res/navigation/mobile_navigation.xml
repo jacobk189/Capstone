@@ -15,229 +15,419 @@
         android:id="@+id/Francis_H_Boyle_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="8"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Carol_and_Robert_Busch_Art_Center"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="19"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Austin_E_Cofrin_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="23"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Gehl_Mulva_Science_Center"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="4"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Medical_College_of_Wisconsin"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="5"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Miriam_B_and_James_J_Mulva_Library"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="29"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Abbot_Pennings_Hall_of_Fine_Arts"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="20"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Dudley_Birder_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="33"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Cassandra_Voss_Center"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="26"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Old_St_Joseph_Church"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="7"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Rev_Ignatius_Francis_Van_Dyke_Alumni_House"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="27"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Ray_Van_Dan_Heuvel_Family_Campus_Center"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="11"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Michels_Commons"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="18"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Mulva_Family_Fitness_and_Sports_Center"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="16"/>
+    </fragment>
     <fragment
         android:id="@+id/Pennings_Activity_Center"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="24"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Dennis_M_Burke_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="13"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Ralph_and_Catherine_Paulson_Carriage"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="15"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Doksany_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="36"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Gertrude_S_Bergstrom_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="2"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Madelaine_and_Lorraine_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="3"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Mary_Minahan_McCormick_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="1"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Frank_J_Sensenbrenner_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="12"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Fr_Eugene_E_Gries_OPraem_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="31"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Hugh_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="35"/>
+    </fragment>
+
 
     <fragment
         android:id="@+id/Dale_and_Ruths_Michels_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="32"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Premontre_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="37"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Roggenburg_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="34"/>
+    </fragment>
 
     <fragment
         android:id="@+id/St_Joseph_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="6"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Thomas_and_Maureen_Manion_Townhouse_Village"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="14"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Victor_McCormick_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="17"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Xanten_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="38"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Ariens_Family_Welcome_Center"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="28"/>
+    </fragment>
 
     <fragment
         android:id="@+id/FK_Bemis_International_Center"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="22"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Main_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="10"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Todd_Wehr_Hall"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="21"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Heating_Plant"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="9"/>
+    </fragment>
 
     <fragment
         android:id="@+id/George_F_Kress_Residence_for_Executive_Education"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="25"/>
+    </fragment>
 
     <fragment
         android:id="@+id/Grounds_Facility"
         android:name="com.example.capstone.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <argument
+            android:name="building_number"
+            app:argType="string"
+            android:defaultValue="30"/>
+    </fragment>
 
 
     <!--<fragment
