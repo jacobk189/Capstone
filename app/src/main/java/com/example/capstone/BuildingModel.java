@@ -1,6 +1,9 @@
 package com.example.capstone;
 
-public class BuildingModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class BuildingModel implements Parcelable {
 
     private int ID;
     private String BUILDING_NAME;
@@ -21,6 +24,56 @@ public class BuildingModel {
         this.BUILDING_HISTORY = history;
         this.BUILDING_NICKNAME = nickname;
     }
+
+
+
+    public String toString() {
+        return "BuildingModel{" +
+                "buildingID=" + ID +
+                ", buildingName='" + BUILDING_NAME + '\'' +
+                ", buildingAddress='" + BUILDING_ADDRESS + '\'' +
+                ", buildingLatitude=" + BUILDING_LATITUDE +
+                ", buildingLongitude=" + BUILDING_LONGITUDE +
+                ", buildingInfo='" + BUILDING_INFO + '\'' +
+                ", buildingHistory='" + BUILDING_HISTORY + '\'' +
+                ", buildingNickname='" + BUILDING_NICKNAME + '\'' +
+                '}';
+    }
+
+    protected BuildingModel(Parcel in) {
+        ID = in.readInt();
+        BUILDING_NAME = in.readString();
+        BUILDING_ADDRESS = in.readString();
+        BUILDING_LATITUDE = in.readDouble();
+        BUILDING_LONGITUDE = in.readDouble();
+        BUILDING_INFO = in.readString();
+        BUILDING_HISTORY = in.readString();
+        BUILDING_NICKNAME = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(ID);
+        dest.writeString(BUILDING_NAME);
+        dest.writeString(BUILDING_ADDRESS);
+        dest.writeDouble(BUILDING_LATITUDE);
+        dest.writeDouble(BUILDING_LONGITUDE);
+        dest.writeString(BUILDING_INFO);
+        dest.writeString(BUILDING_HISTORY);
+        dest.writeString(BUILDING_NICKNAME);
+    }
+
+    public static final Creator<BuildingModel> CREATOR = new Creator<BuildingModel>() {
+        @Override
+        public BuildingModel createFromParcel(Parcel in) {
+            return new BuildingModel(in);
+        }
+
+        @Override
+        public BuildingModel[] newArray(int size) {
+            return new BuildingModel[size];
+        }
+    };
 
     public int getID() {
         return ID;
@@ -85,17 +138,9 @@ public class BuildingModel {
     public void setNickname(String nickname) {
         this.BUILDING_NICKNAME = nickname;
     }
-
-    public String toString() {
-        return "BuildingModel{" +
-                "buildingID=" + ID +
-                ", buildingName='" + BUILDING_NAME + '\'' +
-                ", buildingAddress='" + BUILDING_ADDRESS + '\'' +
-                ", buildingLatitude=" + BUILDING_LATITUDE +
-                ", buildingLongitude=" + BUILDING_LONGITUDE +
-                ", buildingInfo='" + BUILDING_INFO + '\'' +
-                ", buildingHistory='" + BUILDING_HISTORY + '\'' +
-                ", buildingNickname='" + BUILDING_NICKNAME + '\'' +
-                '}';
+    @Override
+    public int describeContents() {
+        return 0;
     }
+
 }

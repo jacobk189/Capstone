@@ -20,18 +20,18 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
 import com.example.capstone.R;
-import com.example.capstone.databinding.FragmentGalleryBinding;
+import com.example.capstone.databinding.FragmentIndInfoBinding;
 import com.example.capstone.ui.home.TourOneFragment;
 
 import java.util.List;
 
-public class GalleryFragment extends Fragment {
+public class IndInfoFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentIndInfoBinding binding;
     private int buildingNumber = 0;
     private TextView buildingName;
-    private Button directionsBtn;
-    private Button informationBtn;
+
+    private Button continueButton;
     private BuildingModel currentBuilding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -40,16 +40,24 @@ public class GalleryFragment extends Fragment {
                 new ViewModelProvider(this).get(GalleryViewModel.class);
 
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentIndInfoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        Log.d("&&&&&&&&&", "inside of indinfo fragment");
+
         if (getArguments() != null) {
-            String id = getArguments().getString("building_number");
-            buildingNumber = Integer.parseInt(id);
-            Log.d("here", "ID: " + buildingNumber);
+            Log.d("Inside get arugment not null", "");
+            Fragment callingFragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+            Log.d("callingFragment class", callingFragment.getClass().getSimpleName());
+            if (callingFragment instanceof com.example.capstone.ui.gallery.IndInfoFragment) {
+                Log.d("Inside infofragment called this", "");
+                int id = getArguments().getInt("ID");
+                buildingNumber = id;
+
+            }
         }
 
-        BuildingDB buildingDB = new BuildingDB(GalleryFragment.this);
+        BuildingDB buildingDB = new BuildingDB(com.example.capstone.ui.gallery.IndInfoFragment.this);
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
         for (BuildingModel building : buildingList) {
@@ -59,48 +67,28 @@ public class GalleryFragment extends Fragment {
             }
         }
 
-        buildingName = root.findViewById(R.id.BuildingName);
+        continueButton = root.findViewById(R.id.continueButton);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                GalleryFragment galleryFragment = new GalleryFragment();
+                Bundle buildingID = new Bundle();
+                buildingID.putString("building_number",""+currentBuilding.getID());
+                galleryFragment.setArguments(buildingID);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, galleryFragment);
+                fragmentTransaction.setReorderingAllowed(true);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        buildingName = root.findViewById(R.id.Name);
+
         buildingName.setText(currentBuilding.getName());
-
-        directionsBtn = root.findViewById(R.id.Directions);
-        informationBtn = root.findViewById(R.id.Information);
-
-        directionsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle directions = new Bundle();
-                directions.putInt("ID", currentBuilding.getID());
-
-                DirectionsFragment directionsFragment = new DirectionsFragment();
-                directionsFragment.setArguments(directions);
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, directionsFragment);
-                fragmentTransaction.setReorderingAllowed(true);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-
-        informationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle info = new Bundle();
-                info.putInt("ID", currentBuilding.getID());
-
-                IndInfoFragment indInfoFragment = new IndInfoFragment();
-                indInfoFragment.setArguments(info);
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, indInfoFragment);
-                fragmentTransaction.setReorderingAllowed(true);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-
         return root;
     }
 
