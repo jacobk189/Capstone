@@ -3,8 +3,6 @@ package com.example.capstone;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
 public class BuildingModel implements Parcelable {
 
     private int ID;

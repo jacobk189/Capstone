@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }*/
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity  {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Set up the navigation view and drawer layout
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        navigationView.setNavigationItemSelectedListener(this);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.Abbot_Pennings_Hall_of_Fine_Arts, R.id.Francis_H_Boyle_Hall, R.id.Carol_and_Robert_Busch_Art_Center,
                 R.id.Austin_E_Cofrin_Hall, R.id.Gehl_Mulva_Science_Center, R.id.Medical_College_of_Wisconsin, R.id.Miriam_B_and_James_J_Mulva_Library,
@@ -128,31 +127,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here
-        Log.d("hi", "inside of navitemselecetd");
-        int id = item.getItemId();
-
-        if (id == R.id.Francis_H_Boyle_Hall) {
-            // Create a bundle with your desired ID and pass it to the gallery fragment
-            Log.d("inside of nav selected", "francis boyle");
-            Bundle bundle = new Bundle();
-            bundle.putInt("id", 123); // replace 123 with your desired ID
-            GalleryFragment galleryFragment = new GalleryFragment();
-            galleryFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_main, galleryFragment).commit();
-        } else {
-            // Handle other navigation view item clicks here
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-            navController.navigate(id);
-        }
-
-        DrawerLayout drawer = binding.drawerLayout;
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override

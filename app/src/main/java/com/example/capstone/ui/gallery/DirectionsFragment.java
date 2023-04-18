@@ -154,10 +154,14 @@ public class DirectionsFragment extends Fragment {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
                         GalleryFragment galleryFragment = new GalleryFragment();
+                        Bundle buildingID = new Bundle();
+                        buildingID.putString("building_number",""+currentBuilding.getID());
+                        galleryFragment.setArguments(buildingID);
                         FragmentManager fragmentManager = getParentFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                         fragmentTransaction.replace(R.id.nav_host_fragment_content_main, galleryFragment);
+                        fragmentTransaction.setReorderingAllowed(true);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
                     }

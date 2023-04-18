@@ -76,6 +76,7 @@ public class InfoFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourOneFragment);
+                fragmentTransaction.setReorderingAllowed(true);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
