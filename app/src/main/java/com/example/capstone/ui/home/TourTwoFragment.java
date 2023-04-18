@@ -49,9 +49,6 @@ public class TourTwoFragment extends Fragment {
 
     private List<LatLng> directions = null;
 
-
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -123,8 +120,6 @@ public class TourTwoFragment extends Fragment {
             }
         }));
 
-
-
         return root;
     }
 
@@ -172,7 +167,7 @@ public class TourTwoFragment extends Fragment {
                                 PolylineOptions polylineOptions = new PolylineOptions().addAll(path).color(Color.BLUE).width(5f);
                                 googleMap.addPolyline(polylineOptions);
                                 Log.d("on directionsreceived", "2");
-                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 16));
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 17));
                                 Log.d("on directionsreceived", "3");
                             }
                         });

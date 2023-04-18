@@ -104,13 +104,6 @@ public class TourOneFragment extends Fragment {
 
                         getDirections(origin,destination,googleMap);
 
-                        /*getDirections(origin, destination,googleMap, new DirectionsCallback() {
-                            @Override
-                            public void onDirectionsReceived(List<LatLng> directions) {
-                                Log.d("Directions returned", directions.toString());
-                            }
-                        });*/
-
                     } else {
                         // Handle the case where the user's location is not available
                         Log.d("null location: ", "null");
