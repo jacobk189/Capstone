@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
+import com.example.capstone.MyLocationListener;
 import com.example.capstone.R;
 import com.example.capstone.databinding.FragmentDirectionsBinding;
 import com.example.capstone.ui.home.HomeFragment;
@@ -61,8 +62,42 @@ public class DirectionsFragment extends Fragment {
     private int buildingNumber = 0;
 
     private BuildingModel currentBuilding;
+    private final int MIN_DISTANCE = 15;
+    private Runnable runnable = null;
 
+    /*private LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            float[] distance = new float[1];
+            *//*Location.distanceBetween(location.getLatitude(), location.getLongitude(),
+                    currentBuilding.getLatitude(), currentBuilding.getLongitude(), distance);*//*
+            Location.distanceBetween(location.getLatitude(), location.getLongitude(),
+                    44.444536, -88.070746, distance);
+            Log.d("checknig", "" + distance[0]);
 
+            if (distance[0] < 100) {
+                GalleryFragment galleryFragment = new GalleryFragment();
+                Bundle buildingID = new Bundle();
+                buildingID.putString("building_number", "" + currentBuilding.getID());
+                galleryFragment.setArguments(buildingID);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, galleryFragment);
+                fragmentTransaction.setReorderingAllowed(true);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                // Remove the location updates to stop the listener
+                LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                //locationManager.unregisterLocationCallback(locationCallback);
+                locationManager.removeUpdates(location1 -> {
+                    LocationListener locationListener1 = locationListener;
+                });
+
+            }
+        }
+    };*/
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -121,6 +156,9 @@ public class DirectionsFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Gallery", currentBuilding.getID(), locationManager, getParentFragmentManager(), null);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
                     Log.d("My Location", myLocation.toString());
 
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 16));
@@ -129,17 +167,65 @@ public class DirectionsFragment extends Fragment {
                         // Use the user's current location to set the origin of the directions request
                         Log.d("Inside location not null", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-                        LatLng destination = new LatLng(currentBuilding.getLatitude(), currentBuilding.getLongitude());
+                        //LatLng destination = new LatLng(currentBuilding.getLatitude(), currentBuilding.getLongitude());
+                        LatLng destination = new LatLng(44.44467309202324, -88.07074847846474);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
 
-                        getDirections(origin,destination,googleMap);
+                        getDirections(origin, destination, googleMap);
+                        /*locationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER,0,0,location -> {
+                            LocationListener locationListener1 = locationListener;
+                        });*/
 
-                        LocationListener locationListener = new LocationListener() {
-                            @Override
-                            public void onLocationChanged(Location location) {
+
+                       /* runnable = new Runnable() {
+                            public void run() {
+                                for (int i = 0; i < 120; i++) {
+                                    if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                                        return;
+                                    }
+                                    Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                    if (lastKnownLocation != null) {
+                                        double latitude = lastKnownLocation.getLatitude();
+                                        double longitude = lastKnownLocation.getLongitude();
+                                        Location destinationLocation = new Location("");
+                                        destinationLocation.setLatitude(destination.latitude);
+                                        destinationLocation.setLongitude(destination.longitude);
+                                        if (lastKnownLocation != null && lastKnownLocation.distanceTo(destinationLocation) <= MIN_DISTANCE) {
+                                            Log.d("Arrived", "You have arrived at the destination!");
+                                            GalleryFragment galleryFragment = new GalleryFragment();
+                                            Bundle buildingID = new Bundle();
+                                            buildingID.putString("building_number",""+currentBuilding.getID());
+                                            galleryFragment.setArguments(buildingID);
+                                            FragmentManager fragmentManager = getParentFragmentManager();
+                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                            fragmentTransaction.replace(R.id.nav_host_fragment_content_main, galleryFragment);
+                                            fragmentTransaction.setReorderingAllowed(true);
+                                            fragmentTransaction.addToBackStack(null);
+                                            fragmentTransaction.commit();
+                                            Thread thread = new Thread(runnable);
+                                            thread.currentThread().interrupt();
+                                        } else {
+                                            Log.d("Location", "Latitude: " + lastKnownLocation.getLatitude() + ", Longitude: " + lastKnownLocation.getLongitude());
+                                        }
+
+                                    } else {
+                                        Log.d("Location", "Last known location is null.");
+                                    }
+                                    try {
+                                        Thread.sleep(1000); // wait for 1 second
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                        Log.d("failed", e.toString());
+                                    }
+                                }
                             }
                         };
+
+                        Thread thread = new Thread(runnable);
+                        thread.start();*/
 
                     } else {
                         Log.d("null location: ", "null");
@@ -150,7 +236,7 @@ public class DirectionsFragment extends Fragment {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
 
-                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                /*googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
                         GalleryFragment galleryFragment = new GalleryFragment();
@@ -165,7 +251,7 @@ public class DirectionsFragment extends Fragment {
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
                     }
-                });
+                });*/
             }
         }));
 
@@ -173,6 +259,9 @@ public class DirectionsFragment extends Fragment {
 
         return root;
     }
+
+
+
 
     private void getDirections(LatLng origin, LatLng destination, GoogleMap googleMap) {
         // Create a new instance of the Directions API

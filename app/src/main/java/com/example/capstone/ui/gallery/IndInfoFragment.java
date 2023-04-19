@@ -74,7 +74,7 @@ public class IndInfoFragment extends Fragment {
 
                 GalleryFragment galleryFragment = new GalleryFragment();
                 Bundle buildingID = new Bundle();
-                buildingID.putString("building_number",""+currentBuilding.getID());
+                buildingID.putInt("ID",currentBuilding.getID());
                 galleryFragment.setArguments(buildingID);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

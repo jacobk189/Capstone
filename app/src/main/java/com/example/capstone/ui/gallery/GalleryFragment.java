@@ -44,9 +44,16 @@ public class GalleryFragment extends Fragment {
         View root = binding.getRoot();
 
         if (getArguments() != null) {
-            String id = getArguments().getString("building_number");
-            buildingNumber = Integer.parseInt(id);
-            Log.d("here", "ID: " + buildingNumber);
+
+            if(getArguments().containsKey("building_number")){
+                String ID = getArguments().getString("building_number");
+                buildingNumber = Integer.parseInt(ID);
+                Log.d("From homefragment", "ID: " + buildingNumber);
+            }
+            else if(getArguments().containsKey("ID")){
+                int id = getArguments().getInt("ID");
+                buildingNumber = id;
+            }
         }
 
         BuildingDB buildingDB = new BuildingDB(GalleryFragment.this);

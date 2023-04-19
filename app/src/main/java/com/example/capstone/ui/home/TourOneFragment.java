@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
+import com.example.capstone.MyLocationListener;
 import com.example.capstone.R;
 import com.example.capstone.databinding.FragmentTourOneBinding;
 import com.google.android.gms.location.LocationListener;
@@ -55,6 +56,8 @@ public class TourOneFragment extends Fragment {
     private List<LatLng> directions = null;
 
     private int count = 0;
+
+    LocationListener locationListener = null;
 
 
 
@@ -92,9 +95,12 @@ public class TourOneFragment extends Fragment {
         BuildingDB buildingDB = new BuildingDB(TourOneFragment.this);
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
-        List<BuildingModel> academicTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
+        //List<BuildingModel> academicTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
+        Log.d("checking count ", "akdsflkhadslkfj:"+count);
+        ArrayList<BuildingModel> academicTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
 
-        if (count >= academicTour.size()){
+
+        if (count == academicTour.size()){
             count = 0;
             String completed = "Academic Tour Completed";
             HomeFragment homeFragment = new HomeFragment();
@@ -104,6 +110,7 @@ public class TourOneFragment extends Fragment {
             FragmentManager fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.nav_host_fragment_content_main, homeFragment);
+            fragmentTransaction.setReorderingAllowed(true);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
@@ -125,6 +132,9 @@ public class TourOneFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(),academicTour);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
                     Log.d("My Location", myLocation.toString());
 
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 16));
@@ -138,43 +148,7 @@ public class TourOneFragment extends Fragment {
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
 
-                        getDirections(origin,destination,googleMap);
-
-                        LocationListener locationListener = new LocationListener() {
-                            @Override
-                            public void onLocationChanged(Location location) {
-                                Log.d("Inside on location changed", "location");
-                                float[] distance = new float[2];
-                                //LatLng destination = new LatLng(-34, 151); // Replace with your destination location
-                                LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                                Log.d("Inside on location changed", currentLocation.toString());
-
-                                Location.distanceBetween(destination.latitude, destination.longitude,
-                                        currentLocation.latitude, currentLocation.longitude, distance);
-
-                                if (distance[0] < 100) { // Replace 100 with your desired distance threshold
-                                    Log.d("Inside on location changed", distance.toString());
-                                    // Open new fragment
-                                    HomeFragment home = new HomeFragment();
-                                    FragmentManager fragmentManager = getParentFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                                    fragmentTransaction.replace(R.id.nav_host_fragment_content_main, home);
-                                    fragmentTransaction.addToBackStack(null);
-                                    fragmentTransaction.commit();
-
-                                    // Remove location updates
-                                    //locationManager.removeUpdates(getContext());
-                                }
-                            }
-                        };
-
-                        /*getDirections(origin, destination,googleMap, new DirectionsCallback() {
-                            @Override
-                            public void onDirectionsReceived(List<LatLng> directions) {
-                                Log.d("Directions returned", directions.toString());
-                            }
-                        });*/
+                        getDirections(origin, destination, googleMap);
 
                     } else {
                         // Handle the case where the user's location is not available

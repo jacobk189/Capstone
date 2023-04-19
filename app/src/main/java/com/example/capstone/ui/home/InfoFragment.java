@@ -43,6 +43,7 @@ public class InfoFragment extends Fragment {
         Log.d("&&&&&&&&&", "inside of infofragment");
 
         Bundle receive = getArguments();
+        //assert receive != null;
         int count = receive.getInt("Tour counter");
         //Toast.makeText(getContext(), "This is the count: "+count, Toast.LENGTH_SHORT).show();
 
@@ -83,8 +84,7 @@ public class InfoFragment extends Fragment {
         });
 
         buildingName = root.findViewById(R.id.Name);
-
-        buildingName.setText(tourList.get(count).getName()+" "+tourList.get(count).getID());
+        buildingName.setText(tourList.get(count).getName());
 
 
         return root;

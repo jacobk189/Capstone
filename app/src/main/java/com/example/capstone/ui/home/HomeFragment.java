@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
             Log.d("callingFragment class", callingFragment.getClass().getSimpleName());
             if (callingFragment instanceof HomeFragment) {
                 String message = getArguments().getString("Finished");
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         }
 
