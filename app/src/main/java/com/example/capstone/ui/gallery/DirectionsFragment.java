@@ -138,6 +138,9 @@ public class DirectionsFragment extends Fragment {
                 break;
             }
         }
+        androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle(""+currentBuilding.getName());
+
 
         String apiKey = getString(R.string.google_maps_key);
 
@@ -156,7 +159,7 @@ public class DirectionsFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Gallery", currentBuilding.getID(), locationManager, getParentFragmentManager(), null);
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Gallery", currentBuilding.getID(), locationManager, getParentFragmentManager(), null, 0);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
                     Log.d("My Location", myLocation.toString());

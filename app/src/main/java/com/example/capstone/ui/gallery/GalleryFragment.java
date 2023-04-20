@@ -66,6 +66,9 @@ public class GalleryFragment extends Fragment {
             }
         }
 
+        androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle(""+currentBuilding.getName());
+
         buildingName = root.findViewById(R.id.BuildingName);
         buildingName.setText(currentBuilding.getName());
 

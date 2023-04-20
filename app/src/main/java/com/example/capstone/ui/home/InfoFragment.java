@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,7 @@ public class InfoFragment extends Fragment {
 
     private Button continueButton;
 
+    private int count = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,8 +46,21 @@ public class InfoFragment extends Fragment {
 
         Bundle receive = getArguments();
         //assert receive != null;
-        int count = receive.getInt("Tour counter");
+        count = receive.getInt("Tour counter");
+        int tourType = receive.getInt("tourType");
         //Toast.makeText(getContext(), "This is the count: "+count, Toast.LENGTH_SHORT).show();
+
+        androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        if (tourType == 1){
+            toolbar.setTitle("Academics");
+        }
+        else if (tourType == 2){
+            toolbar.setTitle("Living Areas");
+        }
+        else if (tourType == 3){
+            toolbar.setTitle("Areas of Interest");
+        }
 
 
         List<BuildingModel> tourList = receive.getParcelableArrayList("tourList");
@@ -59,33 +74,63 @@ public class InfoFragment extends Fragment {
                 Log.d("List size", String.valueOf(tourList.size()));
                 Log.d("Next count", String.valueOf(nextCount));
 
-                /*if (nextCount >= tourList.size()){
+                if (nextCount >= tourList.size()){
+                    count = 0;
+                    String completed = "Academic Tour Completed";
                     HomeFragment homeFragment = new HomeFragment();
+                    Bundle completedTour = new Bundle();
+                    completedTour.putString("Finished",completed);
+                    homeFragment.setArguments(completedTour);
                     FragmentManager fragmentManager = getParentFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.nav_host_fragment_content_main, homeFragment);
+                    fragmentTransaction.setReorderingAllowed(true);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-                }*/
+                }
+                else {
+                    Bundle count = new Bundle();
+                    count.putInt("Next Count", nextCount);
 
-                Bundle test = new Bundle();
-                test.putInt("Next Count", nextCount);
+                    if (tourType == 1){
+                        TourOneFragment tourOneFragment = new TourOneFragment();
+                        tourOneFragment.setArguments(count);
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                TourOneFragment tourOneFragment = new TourOneFragment();
-                tourOneFragment.setArguments(test);
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourOneFragment);
+                        fragmentTransaction.setReorderingAllowed(true);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                    else if (tourType == 2){
+                        TourTwoFragment tourTwoFragment = new TourTwoFragment();
+                        tourTwoFragment.setArguments(count);
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourOneFragment);
-                fragmentTransaction.setReorderingAllowed(true);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourTwoFragment);
+                        fragmentTransaction.setReorderingAllowed(true);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                    else if (tourType == 3){
+                        TourThreeFragment tourThreeFragment = new TourThreeFragment();
+                        tourThreeFragment.setArguments(count);
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourThreeFragment);
+                        fragmentTransaction.setReorderingAllowed(true);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                }
             }
         });
 
         buildingName = root.findViewById(R.id.Name);
         buildingName.setText(tourList.get(count).getName());
-
 
         return root;
     }

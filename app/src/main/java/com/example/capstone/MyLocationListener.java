@@ -22,13 +22,14 @@ public class MyLocationListener implements LocationListener {
     private double destLatitude;
     private double destLongitude;
     private int id;
+    private int type;
     private String fragmentId;
     private LocationManager locationManager;
     private FragmentManager fragmentManager;
     private ArrayList<BuildingModel> tour;
     private Context context;
 
-    public MyLocationListener(Context context, double destLatitude, double destLongitude, String fragmentId, int id, LocationManager locationManager, FragmentManager fragmentManager, ArrayList<BuildingModel> tour) {
+    public MyLocationListener(Context context, double destLatitude, double destLongitude, String fragmentId, int id, LocationManager locationManager, FragmentManager fragmentManager, ArrayList<BuildingModel> tour, int type) {
         this.context = context;
         this.destLatitude = destLatitude;
         this.destLongitude = destLongitude;
@@ -37,6 +38,7 @@ public class MyLocationListener implements LocationListener {
         this.locationManager = locationManager;
         this.fragmentManager = fragmentManager;
         this.tour = tour;
+        this.type = type;
     }
 
     @Override
@@ -66,6 +68,15 @@ public class MyLocationListener implements LocationListener {
                     Bundle tourCounter = new Bundle();
                     tourCounter.putInt("Tour counter", id);
                     tourCounter.putParcelableArrayList("tourList", (ArrayList<? extends Parcelable>) new ArrayList<BuildingModel>(tour));
+                    if (type == 1){
+                        tourCounter.putInt("tourType", 1);
+                    }
+                    else if (type == 2){
+                        tourCounter.putInt("tourType", 2);
+                    }
+                    else if (type == 3){
+                        tourCounter.putInt("tourType", 3);
+                    }
                     infoFragment.setArguments(tourCounter);
                     fragmentTransaction.replace(R.id.nav_host_fragment_content_main, infoFragment);
                     fragmentTransaction.setReorderingAllowed(true);

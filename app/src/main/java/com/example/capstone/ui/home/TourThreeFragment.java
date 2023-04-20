@@ -27,7 +27,8 @@ import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
 import com.example.capstone.MyLocationListener;
 import com.example.capstone.R;
-import com.example.capstone.databinding.FragmentTourOneBinding;
+import com.example.capstone.databinding.FragmentHomeBinding;
+import com.example.capstone.databinding.FragmentTourThreeBinding;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -46,11 +47,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TourOneFragment extends Fragment {
+public class TourThreeFragment extends Fragment {
 
-    private FragmentTourOneBinding binding;
+    private FragmentTourThreeBinding binding;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    BluetoothAdapter ba;
     private GoogleMap mMap;
 
     private List<LatLng> directions = null;
@@ -62,7 +62,7 @@ public class TourOneFragment extends Fragment {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentTourOneBinding.inflate(inflater, container, false);
+        binding = FragmentTourThreeBinding.inflate(inflater, container, false);
         View root = inflater.inflate(R.layout.fragment_tour_one, container, false);
         FrameLayout mapContainer = root.findViewById(R.id.m_container);
 
@@ -72,29 +72,28 @@ public class TourOneFragment extends Fragment {
             getChildFragmentManager().beginTransaction().add(mapContainer.getId(), supportMapFragment).commit();
         }
 
-        Log.d("&&&&&&&&&", "inside of touronefragment");
+        Log.d("&&&&&&&&&", "inside of tourtwofragment");
 
         androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("Academics");
+        toolbar.setTitle("Areas of Interest");
 
         if (getArguments() != null) {
             Log.d("Inside get arugment not null", "");
             Fragment callingFragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
             Log.d("callingFragment class", callingFragment.getClass().getSimpleName());
-            if (callingFragment instanceof TourOneFragment) {
+            if (callingFragment instanceof TourThreeFragment) {
                 Log.d("Inside infofragment called this", "");
                 int newCount = getArguments().getInt("Next Count");
                 count = newCount;
-
-                //Toast.makeText(getContext(), "This is the count: "+count, Toast.LENGTH_SHORT).show();
             }
         }
 
-        BuildingDB buildingDB = new BuildingDB(TourOneFragment.this);
+        BuildingDB buildingDB = new BuildingDB(TourThreeFragment.this);
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
+        //List<BuildingModel> academicTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
         Log.d("checking count ", "akdsflkhadslkfj:"+count);
-        ArrayList<BuildingModel> academicTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
+        ArrayList<BuildingModel> areasofInterestTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
 
         String apiKey = getString(R.string.google_maps_key);
 
@@ -113,8 +112,8 @@ public class TourOneFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), academicTour, 1);
-                    //MyLocationListener locationListener = new MyLocationListener(requireContext(), academicTour.get(count).getLatitude(), academicTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), areasofInterestTour, 3);
+                    //MyLocationListener locationListener = new MyLocationListener(requireContext(), livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), areasofInterestTour, 3);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
                     Log.d("My Location", myLocation.toString());
@@ -125,7 +124,7 @@ public class TourOneFragment extends Fragment {
                         // Use the user's current location to set the origin of the directions request
                         Log.d("Inside location not null", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-                        LatLng destination = new LatLng(academicTour.get(count).getLatitude(), academicTour.get(count).getLongitude());
+                        LatLng destination = new LatLng(areasofInterestTour.get(count).getLatitude(), areasofInterestTour.get(count).getLongitude());
                         //LatLng destination = new LatLng(44.444648402445374, -88.07028337312235);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
@@ -141,28 +140,6 @@ public class TourOneFragment extends Fragment {
                     Log.d("something wrong with location access", "here");
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
-
-                /*googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(@NonNull LatLng latLng) {
-
-                        Bundle tourOne = new Bundle();
-                        tourOne.putInt("Tour counter",count);
-                        tourOne.putParcelableArrayList("tourList", (ArrayList<? extends Parcelable>) new ArrayList<BuildingModel>(academicTour));
-                        tourOne.putInt("tourType", 1);
-
-                        InfoFragment infoFragment = new InfoFragment();
-                        infoFragment.setArguments(tourOne);
-                        FragmentManager fragmentManager = getParentFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, infoFragment);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-
-
-                    }
-                });*/
             }
         }));
 

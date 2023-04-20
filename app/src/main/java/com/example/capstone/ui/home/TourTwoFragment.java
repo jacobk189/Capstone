@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +19,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
+import com.example.capstone.MyLocationListener;
 import com.example.capstone.R;
+import com.example.capstone.databinding.FragmentHomeBinding;
 import com.example.capstone.databinding.FragmentTourTwoBinding;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,16 +44,18 @@ import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.TravelMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TourTwoFragment extends Fragment {
 
-    private @NonNull FragmentTourTwoBinding binding;
+    private FragmentTourTwoBinding binding;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    BluetoothAdapter ba;
     private GoogleMap mMap;
 
     private List<LatLng> directions = null;
+
+    private int count = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,8 +63,7 @@ public class TourTwoFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentTourTwoBinding.inflate(inflater, container, false);
-        //View root = binding.getRoot();
-        View root = inflater.inflate(R.layout.fragment_tour_two, container, false);
+        View root = inflater.inflate(R.layout.fragment_tour_one, container, false);
         FrameLayout mapContainer = root.findViewById(R.id.m_container);
 
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.m_container);
@@ -65,10 +72,27 @@ public class TourTwoFragment extends Fragment {
             getChildFragmentManager().beginTransaction().add(mapContainer.getId(), supportMapFragment).commit();
         }
 
-        Log.d("&&&&&&&&&", "inside of touronefragment");
+        Log.d("&&&&&&&&&", "inside of tourtwofragment");
+
+        androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Living Areas");
+
+        if (getArguments() != null) {
+            Log.d("Inside get arugment not null", "");
+            Fragment callingFragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+            Log.d("callingFragment class", callingFragment.getClass().getSimpleName());
+            if (callingFragment instanceof TourTwoFragment) {
+                Log.d("Inside infofragment called this", "");
+                int newCount = getArguments().getInt("Next Count");
+                count = newCount;
+            }
+        }
 
         BuildingDB buildingDB = new BuildingDB(TourTwoFragment.this);
         List<BuildingModel> buildingList = buildingDB.showbuildings();
+
+        Log.d("checking count ", "akdsflkhadslkfj:"+count);
+        ArrayList<BuildingModel> livingAreasTour = new ArrayList<>(Arrays.asList(buildingList.get(2), buildingList.get(1), buildingList.get(0), buildingList.get(5), buildingList.get(12), buildingList.get(11)));
 
         String apiKey = getString(R.string.google_maps_key);
 
@@ -87,6 +111,10 @@ public class TourTwoFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
+                    //MyLocationListener locationListener = new MyLocationListener(requireContext(), livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
                     Log.d("My Location", myLocation.toString());
 
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 16));
@@ -95,11 +123,12 @@ public class TourTwoFragment extends Fragment {
                         // Use the user's current location to set the origin of the directions request
                         Log.d("Inside location not null", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-                        LatLng destination = new LatLng(buildingList.get(17).getLatitude(), buildingList.get(17).getLongitude());
+                        LatLng destination = new LatLng(livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude());
+                        //LatLng destination = new LatLng(44.444648402445374, -88.07028337312235);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
 
-                        getDirections(origin,destination,googleMap);
+                        getDirections(origin, destination, googleMap);
 
                     } else {
                         // Handle the case where the user's location is not available
@@ -110,13 +139,6 @@ public class TourTwoFragment extends Fragment {
                     Log.d("something wrong with location access", "here");
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
-
-                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(@NonNull LatLng latLng) {
-
-                    }
-                });
             }
         }));
 

@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -51,13 +52,25 @@ import java.util.Set;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+
     private Button tourOneButton;
+
     private Button tourTwoButton;
+
+    private Button tourThreeButton;
+
     private CheckBox btCheckbox;
+
+    private TextView title;
+
     private static final int REQUEST_ENABLE_BT = 1;
+
     private BluetoothAdapter bluetoothAdapter;
+
     private Set<BluetoothDevice> pairedDevices;
+
     IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+
     private BluetoothReceiver bluetoothReceiver;
 
     /*private final ActivityResultLauncher<String[]> requestPermissionLauncher =
@@ -81,8 +94,12 @@ public class HomeFragment extends Fragment {
 
         Log.d("&&&&&&&&&", "inside of homefragment 1");
 
+        title = root.findViewById(R.id.Name);
+        title.setText("Welcome to Knights Guide");
+
         tourOneButton = root.findViewById(R.id.tour1button);
         tourTwoButton = root.findViewById(R.id.tour2button);
+        tourThreeButton = root.findViewById(R.id.tour3button);
 
         //BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(BluetoothManager.class);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -109,6 +126,8 @@ public class HomeFragment extends Fragment {
             if (callingFragment instanceof HomeFragment) {
                 String message = getArguments().getString("Finished");
                 //Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
+                toolbar.setTitle("Home");
             }
         }
 
@@ -140,6 +159,19 @@ public class HomeFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourTwo);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        tourThreeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TourThreeFragment tourThree = new TourThreeFragment();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourThree);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

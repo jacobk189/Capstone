@@ -67,6 +67,9 @@ public class IndInfoFragment extends Fragment {
             }
         }
 
+        androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle(""+currentBuilding.getName());
+
         continueButton = root.findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
