@@ -29,6 +29,10 @@ public class InfoFragment extends Fragment {
 
     private TextView buildingName;
 
+    private TextView information;
+
+    private TextView history;
+
     private Button continueButton;
 
     private int count = 0;
@@ -42,7 +46,11 @@ public class InfoFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_info, container, false);
 
+        root.setBackgroundColor(getResources().getColor(R.color.background));
+
         Log.d("&&&&&&&&&", "inside of infofragment");
+
+
 
         Bundle receive = getArguments();
         //assert receive != null;
@@ -62,8 +70,16 @@ public class InfoFragment extends Fragment {
             toolbar.setTitle("Areas of Interest");
         }
 
-
         List<BuildingModel> tourList = receive.getParcelableArrayList("tourList");
+
+        buildingName = root.findViewById(R.id.Name);
+        buildingName.setText(tourList.get(count).getName());
+
+        information = root.findViewById(R.id.Info);
+        information.setText(tourList.get(count).getInfo());
+
+        history = root.findViewById(R.id.History);
+        history.setText(tourList.get(count).getHistory());
 
         continueButton = root.findViewById(R.id.continueButton);
         int nextCount = count + 1;
@@ -134,8 +150,7 @@ public class InfoFragment extends Fragment {
             }
         });
 
-        buildingName = root.findViewById(R.id.Name);
-        buildingName.setText(tourList.get(count).getName());
+
 
         return root;
     }

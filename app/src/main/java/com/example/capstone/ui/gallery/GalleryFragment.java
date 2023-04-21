@@ -43,6 +43,8 @@ public class GalleryFragment extends Fragment {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        root.setBackgroundColor(getResources().getColor(R.color.background));
+
         if (getArguments() != null) {
 
             if(getArguments().containsKey("building_number")){

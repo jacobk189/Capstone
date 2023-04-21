@@ -49,6 +49,8 @@ public class IndInfoFragment extends Fragment {
         binding = FragmentIndInfoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        root.setBackgroundColor(getResources().getColor(R.color.background));
+
         Log.d("&&&&&&&&&", "inside of indinfo fragment");
 
         if (getArguments() != null) {
