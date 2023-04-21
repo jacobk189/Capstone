@@ -67,6 +67,11 @@ public class InfoFragment extends Fragment {
 
         continueButton = root.findViewById(R.id.continueButton);
         int nextCount = count + 1;
+
+        if (nextCount >= tourList.size()){
+            continueButton.setText("Finish");
+        }
+
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

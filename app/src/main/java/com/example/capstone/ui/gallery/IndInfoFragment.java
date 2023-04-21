@@ -23,6 +23,8 @@ import com.example.capstone.R;
 import com.example.capstone.databinding.FragmentIndInfoBinding;
 import com.example.capstone.ui.home.TourOneFragment;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class IndInfoFragment extends Fragment {
@@ -30,6 +32,10 @@ public class IndInfoFragment extends Fragment {
     private FragmentIndInfoBinding binding;
     private int buildingNumber = 0;
     private TextView buildingName;
+
+    private TextView information;
+
+    private TextView history;
 
     private Button continueButton;
     private BuildingModel currentBuilding;
@@ -69,6 +75,12 @@ public class IndInfoFragment extends Fragment {
 
         androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(""+currentBuilding.getName());
+
+        information = root.findViewById(R.id.Info);
+        history = root.findViewById(R.id.History);
+
+        information.setText(currentBuilding.getInfo());
+        history.setText(currentBuilding.getHistory());
 
         continueButton = root.findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
