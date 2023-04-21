@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="sncgreen">#228B22</color>
+    <color name="background">#a7c957 </color>
+    <color name="appbar">#daa520</color>
+    <color name="button">#333333</color>
+    <color name="text">#f2f2f2 </color>
 </resources>

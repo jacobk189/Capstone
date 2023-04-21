@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/Name"
-        android:layout_width="222dp"
-        android:layout_height="81dp"
+        android:layout_width="333dp"
+        android:layout_height="83dp"
         android:gravity="center"
         android:text="Info page"
-        android:textColor="@color/sncgreen"
-        android:textSize="20sp"
+        android:textColor="@color/text"
+        android:textSize="40sp"
         android:textStyle="bold"
         android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +28,8 @@
         android:id="@+id/tour1button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/sncgreen"
+        android:background="@color/button"
+        android:layout_marginTop="15dp"
         android:text="Academic Tour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,26 +41,93 @@
         android:id="@+id/tour2button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/sncgreen"
+        android:background="@color/button"
+        android:layout_marginTop="15dp"
         android:text="Living Areas Tour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.518" /><![CDATA[
+
+
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal">
+
+    ]]>
 
     <Button
         android:id="@+id/tour3button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/button"
         android:text="Areas of Interest Tour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.718" />
+        app:layout_constraintVertical_bias="0.723" />
+
+    <ImageView
+        android:id="@+id/instagram"
+        android:layout_width="76dp"
+        android:layout_height="74dp"
+        android:layout_weight="1"
+        app:backgroundTint="@drawable/roundedmask"
+        android:src="@drawable/realinstagramlogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.337"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942" />
+
+    <ImageView
+        android:id="@+id/tiktok"
+        android:layout_width="76dp"
+        android:layout_height="74dp"
+        android:layout_weight="1"
+        app:backgroundTint="@drawable/roundedmask"
+        android:src="@drawable/tiktok_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942" />
+
+    <ImageView
+        android:id="@+id/facebook"
+        android:layout_width="76dp"
+        android:layout_height="74dp"
+        android:layout_weight="1"
+        app:backgroundTint="@drawable/roundedmask"
+        android:src="@drawable/realfacebooklogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942" />
+
+    <ImageView
+        android:id="@+id/youtube"
+        android:layout_width="76dp"
+        android:layout_height="74dp"
+        android:layout_weight="1"
+        android:background="@drawable/roundedmask"
+        android:src="@drawable/realyoutube"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

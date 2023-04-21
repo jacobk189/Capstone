@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +65,14 @@ public class HomeFragment extends Fragment {
 
     private TextView title;
 
+    private ImageView tiktok;
+
+    private ImageView instagram;
+
+    private ImageView facebook;
+
+    private ImageView youtube;
+
     private static final int REQUEST_ENABLE_BT = 1;
 
     private BluetoothAdapter bluetoothAdapter;
@@ -92,14 +102,21 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        root.setBackgroundColor(getResources().getColor(R.color.background));
+
         Log.d("&&&&&&&&&", "inside of homefragment 1");
 
         title = root.findViewById(R.id.Name);
-        title.setText("Welcome to Knights Guide");
+        title.setText("Norby Nav");
 
         tourOneButton = root.findViewById(R.id.tour1button);
         tourTwoButton = root.findViewById(R.id.tour2button);
         tourThreeButton = root.findViewById(R.id.tour3button);
+
+        tiktok = root.findViewById(R.id.tiktok);
+        instagram = root.findViewById(R.id.instagram);
+        facebook = root.findViewById(R.id.facebook);
+        youtube = root.findViewById(R.id.youtube);
 
         //BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(BluetoothManager.class);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -174,6 +191,38 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourThree);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+            }
+        });
+
+        tiktok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tiktok.com/@stnorbert"));
+                startActivity(intent);
+            }
+        });
+
+        instagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/stnorbert/"));
+                startActivity(intent);
+            }
+        });
+
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/stnorbert/"));
+                startActivity(intent);
+            }
+        });
+
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/@stnorbertcollege"));
+                startActivity(intent);
             }
         });
 
