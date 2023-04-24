@@ -3,14 +3,24 @@ package com.example.capstone.ui.home;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -114,27 +124,17 @@ public class HomeFragment extends Fragment {
         tourThreeButton = root.findViewById(R.id.tour3button);
 
         tiktok = root.findViewById(R.id.tiktok);
+        RoundImage(tiktok, getResources().getDrawable(R.drawable.tiktok_logo), 50, 50);
+
         instagram = root.findViewById(R.id.instagram);
+        RoundImage(instagram, getResources().getDrawable(R.drawable.realinstagramlogo), 300, 300);
+
         facebook = root.findViewById(R.id.facebook);
+        RoundImage(facebook, getResources().getDrawable(R.drawable.realfacebooklogo), 200, 200);
+
         youtube = root.findViewById(R.id.youtube);
+        RoundImage(youtube, getResources().getDrawable(R.drawable.realyoutube), 500, 500);
 
-        //BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(BluetoothManager.class);
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        /*if (!bluetoothAdapter.isEnabled()) {
-            Toast.makeText(root.getContext(), "inside enable check :(", Toast.LENGTH_SHORT).show();
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        } else {
-            // checking if app has bluetooth permission
-            if (ContextCompat.checkSelfPermission(root.getContext(), Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED) {
-                // Permission is already granted, start discovery
-                bluetoothAdapter.startDiscovery();
-            } else {
-                // Permission is not granted, request it
-                //requestPermissionLauncher.launch(new String[]{Manifest.permission.BLUETOOTH_ADMIN});
-            }
-        }*/
 
         if (getArguments() != null) {
             Log.d("Inside get arugment not null", "");
@@ -157,40 +157,80 @@ public class HomeFragment extends Fragment {
         tourOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("&&&&&&&&&", "inside of homefragment 3");
-                TourOneFragment tourOne = new TourOneFragment();
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Welcome to the Academic Tour! This tour will navigate you around the campus to see all of the academic buildings we have to offer and show you important information about the buildings as well as their history." +
+                        "\n\nWe recommend starting this tour at the Ariens Family Welcome Center located at 316 3rd Street, De Pere, WI.\n\nAre you ready to begin the tour?");
 
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourOne);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TourOneFragment tourOne = new TourOneFragment();
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourOne);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();                    }
+                });
+
+                builder.setNegativeButton("No", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
 
         tourTwoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TourTwoFragment tourTwo = new TourTwoFragment();
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourTwo);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Welcome to the Living Areas Tour! This tour will navigate you around the campus to see most of the living areas we have to offer and show you important information about the buildings as well as their history." +
+                        "\n\nWe recommend starting this tour at the Pennings Activity Center located at 290 Reid St, De Pere, WI.\n\nAre you ready to begin the tour?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TourTwoFragment tourTwo = new TourTwoFragment();
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourTwo);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();                }
+                });
+
+                builder.setNegativeButton("No", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
 
         tourThreeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TourThreeFragment tourThree = new TourThreeFragment();
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourThree);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Welcome to the Areas of Interest Tour! This tour will navigate you around the campus to see all of the interesting areas we have located on this campus and important information about the buildings as well as their history." +
+                        "\n\nRecommended starting location: Ariens Welcome Center\n\nAre you ready to begin the tour?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TourThreeFragment tourThree = new TourThreeFragment();
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, tourThree);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();             }
+                });
+
+                builder.setNegativeButton("No", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
 
@@ -227,6 +267,19 @@ public class HomeFragment extends Fragment {
         });
 
         return root;
+    }
+
+    public void RoundImage(ImageView imageView, Drawable drawable, int rx, int ry){
+
+        Bitmap mMap = ((BitmapDrawable) drawable).getBitmap();
+        Bitmap mRounded = Bitmap.createBitmap(mMap.getWidth(), mMap.getHeight(), mMap.getConfig());
+        Canvas canvas = new Canvas(mRounded);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setShader(new BitmapShader(mMap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+        canvas.drawRoundRect((new RectF(0, 0, mMap.getWidth(), mMap.getHeight())), rx, ry, paint); // Round Image Corner 100 100 100 100
+        imageView.setImageBitmap(mRounded);
+
     }
 
     @Override
