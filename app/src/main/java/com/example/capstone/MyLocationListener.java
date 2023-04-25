@@ -49,7 +49,7 @@ public class MyLocationListener implements LocationListener {
 
         float[] distance = new float[1];
         Location.distanceBetween(latitude, longitude, destLatitude, destLongitude, distance);
-        if (distance[0] <= 20) { // distance in meters
+        if (distance[0] <= 1000) { // distance in meters
             // open new fragment
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             switch (fragmentId) {

@@ -113,7 +113,8 @@ public class TourOneFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), academicTour, 1);
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44553916903, -88.06631479806913, "Tour", count, locationManager, getParentFragmentManager(), academicTour, 1);
+                    //MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), academicTour, 1);
                     //MyLocationListener locationListener = new MyLocationListener(requireContext(), academicTour.get(count).getLatitude(), academicTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
@@ -142,7 +143,7 @@ public class TourOneFragment extends Fragment {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
 
-                /*googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
 
@@ -162,7 +163,7 @@ public class TourOneFragment extends Fragment {
 
 
                     }
-                });*/
+                });
             }
         }));
 
