@@ -12,7 +12,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        android:paddingBottom="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,6 +36,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.026" />
+
+            <ImageView
+                android:id="@+id/indinfoimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/sncknightlogo" />
 
             <TextView
                 android:id="@+id/infotitle"
@@ -61,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="TextView"
+                android:gravity="center"
                 android:textColor="@color/text"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -76,7 +87,7 @@
                 android:id="@+id/historytitle"
                 android:layout_width="137dp"
                 android:layout_height="26dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:gravity="center"
                 android:text="History"
                 android:layout_gravity="center_horizontal"
@@ -96,6 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="TextView"
+                android:gravity="center"
                 android:textColor="@color/text"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -113,6 +125,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Continue"
+                android:textColor="@color/text"
+                android:textStyle="bold"
+                android:typeface="serif"
                 app:backgroundTint="@color/appbar"
                 android:layout_gravity="center_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/transparentknight"
+        android:backgroundTint="#40FFFFFF">
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/Name"
@@ -17,6 +24,7 @@
         android:textSize="40sp"
         android:textStyle="bold"
         android:typeface="serif"
+        android:background="@color/appbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -32,6 +40,9 @@
         app:backgroundTint="@color/appbar"
         android:layout_marginTop="15dp"
         android:text="Academic Tour"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +57,9 @@
         app:backgroundTint="@color/appbar"
         android:layout_marginTop="15dp"
         android:text="Living Areas Tour"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -69,6 +83,9 @@
         android:background="@color/button"
         app:backgroundTint="@color/appbar"
         android:text="Areas of Interest Tour"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -131,6 +148,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.942" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

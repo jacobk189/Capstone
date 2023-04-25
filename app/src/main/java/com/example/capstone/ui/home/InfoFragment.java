@@ -6,9 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
 import com.example.capstone.R;
 import com.example.capstone.databinding.FragmentInfoBinding;
@@ -32,6 +30,8 @@ public class InfoFragment extends Fragment {
     private TextView information;
 
     private TextView history;
+
+    private ImageView image;
 
     private Button continueButton;
 
@@ -75,8 +75,15 @@ public class InfoFragment extends Fragment {
         buildingName = root.findViewById(R.id.Name);
         buildingName.setText(tourList.get(count).getName());
 
+        image = root.findViewById(R.id.tourimage);
+        int imageResourceId = getResources().getIdentifier("_" + tourList.get(count).getID() + "_image", "drawable", getActivity().getPackageName());
+        image.setImageResource(imageResourceId);
+
         information = root.findViewById(R.id.Info);
-        information.setText(tourList.get(count).getInfo());
+        String info = tourList.get(count).getInfo();
+        String address = tourList.get(count).getAddress();
+        String fullInfo = info + "\n\nAddress: " + address;
+        information.setText(fullInfo);
 
         history = root.findViewById(R.id.History);
         history.setText(tourList.get(count).getHistory());

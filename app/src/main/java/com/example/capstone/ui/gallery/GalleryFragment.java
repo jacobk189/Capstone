@@ -1,17 +1,15 @@
 package com.example.capstone.ui.gallery;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,7 +19,6 @@ import com.example.capstone.BuildingDB;
 import com.example.capstone.BuildingModel;
 import com.example.capstone.R;
 import com.example.capstone.databinding.FragmentGalleryBinding;
-import com.example.capstone.ui.home.TourOneFragment;
 
 import java.util.List;
 
@@ -32,6 +29,8 @@ public class GalleryFragment extends Fragment {
     private TextView buildingName;
     private Button directionsBtn;
     private Button informationBtn;
+
+    private ImageView image;
     private BuildingModel currentBuilding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,6 +43,8 @@ public class GalleryFragment extends Fragment {
         View root = binding.getRoot();
 
         root.setBackgroundColor(getResources().getColor(R.color.background));
+
+
 
         if (getArguments() != null) {
 
@@ -73,6 +74,10 @@ public class GalleryFragment extends Fragment {
 
         buildingName = root.findViewById(R.id.BuildingName);
         buildingName.setText(currentBuilding.getName());
+
+        image = root.findViewById(R.id.galleryimage);
+        int imageResourceId = getResources().getIdentifier("_"+currentBuilding.getID() + "_image", "drawable", getActivity().getPackageName());
+        image.setImageResource(imageResourceId);
 
         directionsBtn = root.findViewById(R.id.Directions);
         informationBtn = root.findViewById(R.id.Information);

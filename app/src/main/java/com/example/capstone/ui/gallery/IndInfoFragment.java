@@ -1,5 +1,6 @@
 package com.example.capstone.ui.gallery;
 
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,8 @@ public class IndInfoFragment extends Fragment {
     private TextView history;
 
     private Button continueButton;
+
+    private ImageView image;
     private BuildingModel currentBuilding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -77,6 +81,17 @@ public class IndInfoFragment extends Fragment {
 
         androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(""+currentBuilding.getName());
+
+        image = root.findViewById(R.id.indinfoimage);
+
+        try{
+            int imageResourceId = getResources().getIdentifier("_"+currentBuilding.getID() + "_info_image", "drawable", getActivity().getPackageName());
+            image.setImageResource(imageResourceId);
+        } catch (Resources.NotFoundException e){
+            int imageResourceId = getResources().getIdentifier("_"+currentBuilding.getID() + "_image", "drawable", getActivity().getPackageName());
+            image.setImageResource(imageResourceId);
+        }
+
 
         information = root.findViewById(R.id.Info);
         history = root.findViewById(R.id.History);
