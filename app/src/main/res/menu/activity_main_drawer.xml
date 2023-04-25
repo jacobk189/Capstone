@@ -53,64 +53,6 @@
         </item>
     </group>
 
-    <group>
-        <item android:title="Churches">
-            <menu>
-
-                <item
-                    android:id="@+id/Dudley_Birder_Hall"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Birder Hall" />
-
-                <item
-                    android:id="@+id/Cassandra_Voss_Center"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Cassandra Voss Center" />
-
-                <item
-                    android:id="@+id/Old_St_Joseph_Church"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Old St Joseph Church" />
-
-
-
-            </menu>
-        </item>
-    </group>
-
-    <group>
-        <item android:title="Dining/Recreation">
-            <menu>
-
-                <item
-                    android:id="@+id/Rev_Ignatius_Francis_Van_Dyke_Alumni_House"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Alumni House" />
-
-                <item
-                    android:id="@+id/Ray_Van_Dan_Heuvel_Family_Campus_Center"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Campus Center" />
-
-                <item
-                    android:id="@+id/Michels_Commons"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Michels Commons" />
-
-                <item
-                    android:id="@+id/Mulva_Family_Fitness_and_Sports_Center"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Mulva Fitness Center" />
-
-                <item
-                    android:id="@+id/Pennings_Activity_Center"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Pennings Activity Center" />
-
-            </menu>
-        </item>
-    </group>
-
     <group android:checkableBehavior="single">
         <item android:title="Living Areas">
             <menu>
@@ -200,6 +142,67 @@
     </group>
 
     <group>
+        <item android:title="Venues">
+            <menu>
+
+                <item
+                    android:id="@+id/Rev_Ignatius_Francis_Van_Dyke_Alumni_House"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Alumni House" />
+
+                <item
+                    android:id="@+id/FK_Bemis_International_Center"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Bemis International Center" />
+
+                <item
+                    android:id="@+id/Dudley_Birder_Hall"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Birder Hall" />
+
+                <item
+                    android:id="@+id/Cassandra_Voss_Center"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Cassandra Voss Center" />
+
+                <item
+                    android:id="@+id/Old_St_Joseph_Church"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Old St Joseph Church" />
+
+            </menu>
+        </item>
+    </group>
+
+    <group>
+        <item android:title="Dining/Recreation">
+            <menu>
+
+                <item
+                    android:id="@+id/Ray_Van_Dan_Heuvel_Family_Campus_Center"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Campus Center" />
+
+                <item
+                    android:id="@+id/Michels_Commons"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Michels Commons" />
+
+                <item
+                    android:id="@+id/Mulva_Family_Fitness_and_Sports_Center"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Mulva Fitness Center" />
+
+                <item
+                    android:id="@+id/Pennings_Activity_Center"
+                    android:icon="@drawable/corporate_fare_48px"
+                    android:title="Pennings Activity Center" />
+
+            </menu>
+        </item>
+    </group>
+
+    <group>
         <item android:title="Office Areas">
             <menu>
 
@@ -207,11 +210,6 @@
                     android:id="@+id/Ariens_Family_Welcome_Center"
                     android:icon="@drawable/corporate_fare_48px"
                     android:title="Ariens Welcome Center" />
-
-                <item
-                    android:id="@+id/FK_Bemis_International_Center"
-                    android:icon="@drawable/corporate_fare_48px"
-                    android:title="Bemis International Center" />
 
                 <item
                     android:id="@+id/Main_Hall"

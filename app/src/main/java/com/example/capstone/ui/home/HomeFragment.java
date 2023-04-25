@@ -212,7 +212,7 @@ public class HomeFragment extends Fragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("Welcome to the Areas of Interest Tour! This tour will navigate you around the campus to see all of the interesting areas we have located on this campus and important information about the buildings as well as their history." +
-                        "\n\nRecommended starting location: Ariens Welcome Center\n\nAre you ready to begin the tour?");
+                        "\n\nWe recommend starting this tour at the Ariens Family Welcome Center located at 316 3rd Street, De Pere, WI.\n\nAre you ready to begin the tour?");
 
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
