@@ -159,7 +159,8 @@ public class DirectionsFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Gallery", currentBuilding.getID(), locationManager, getParentFragmentManager(), null, 0);
+                    //MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Gallery", currentBuilding.getID(), locationManager, getParentFragmentManager(), null, 0);
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(),currentBuilding.getLatitude(), currentBuilding.getLongitude(), "Gallery", currentBuilding.getID(), locationManager, getParentFragmentManager(), null, 0);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
                     Log.d("My Location", myLocation.toString());
@@ -170,8 +171,8 @@ public class DirectionsFragment extends Fragment {
                         // Use the user's current location to set the origin of the directions request
                         Log.d("Inside location not null", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-                        //LatLng destination = new LatLng(currentBuilding.getLatitude(), currentBuilding.getLongitude());
-                        LatLng destination = new LatLng(44.44467309202324, -88.07074847846474);
+                        LatLng destination = new LatLng(currentBuilding.getLatitude(), currentBuilding.getLongitude());
+                        //LatLng destination = new LatLng(44.44467309202324, -88.07074847846474);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
 

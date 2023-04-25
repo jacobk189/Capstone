@@ -57,6 +57,10 @@ public class TourOneFragment extends Fragment {
 
     private int count = 0;
 
+    private int tourChosen = 0;
+
+    private ArrayList<BuildingModel> tour;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -94,6 +98,7 @@ public class TourOneFragment extends Fragment {
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
         Log.d("checking count ", "akdsflkhadslkfj:"+count);
+
         ArrayList<BuildingModel> academicTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
 
         String apiKey = getString(R.string.google_maps_key);
@@ -113,8 +118,8 @@ public class TourOneFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), academicTour, 1);
-                    //MyLocationListener locationListener = new MyLocationListener(requireContext(), academicTour.get(count).getLatitude(), academicTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
+                    //MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), academicTour, 1);
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(), academicTour.get(count).getLatitude(), academicTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), academicTour, 2);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
                     Log.d("My Location", myLocation.toString());

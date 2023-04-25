@@ -153,7 +153,6 @@ public class HomeFragment extends Fragment {
 
         Log.d("&&&&&&&&&", "inside of homefragment 2");
 
-
         tourOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

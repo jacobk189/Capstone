@@ -92,7 +92,7 @@ public class TourTwoFragment extends Fragment {
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
         Log.d("checking count ", "akdsflkhadslkfj:"+count);
-        ArrayList<BuildingModel> livingAreasTour = new ArrayList<>(Arrays.asList(buildingList.get(2), buildingList.get(1), buildingList.get(0), buildingList.get(5), buildingList.get(12), buildingList.get(11)));
+        ArrayList<BuildingModel> livingAreasTour = new ArrayList<>(Arrays.asList(buildingList.get(2), buildingList.get(1), buildingList.get(0), buildingList.get(5), buildingList.get(12), buildingList.get(11), buildingList.get(16)));
 
         String apiKey = getString(R.string.google_maps_key);
 
@@ -111,8 +111,8 @@ public class TourTwoFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
-                    //MyLocationListener locationListener = new MyLocationListener(requireContext(), livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
+                    //MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(), livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
                     Log.d("My Location", myLocation.toString());
@@ -141,6 +141,28 @@ public class TourTwoFragment extends Fragment {
                 }
             }
         }));
+
+        /*googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(@NonNull LatLng latLng) {
+
+                        Bundle tourOne = new Bundle();
+                        tourOne.putInt("Tour counter",count);
+                        tourOne.putParcelableArrayList("tourList", (ArrayList<? extends Parcelable>) new ArrayList<BuildingModel>(academicTour));
+                        tourOne.putInt("tourType", 1);
+
+                        InfoFragment infoFragment = new InfoFragment();
+                        infoFragment.setArguments(tourOne);
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, infoFragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+
+
+                    }
+                });*/
 
         return root;
     }

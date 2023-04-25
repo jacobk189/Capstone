@@ -45,11 +45,11 @@ public class MyLocationListener implements LocationListener {
     public void onLocationChanged(Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-        Toast.makeText(context, "Latitude: " + latitude + " Longitude: " + longitude, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Latitude: " + latitude + " Longitude: " + longitude, Toast.LENGTH_SHORT).show();
 
         float[] distance = new float[1];
         Location.distanceBetween(latitude, longitude, destLatitude, destLongitude, distance);
-        if (distance[0] <= 20) { // distance in meters
+        if (distance[0] <= 25) { // distance in meters
             // open new fragment
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             switch (fragmentId) {
