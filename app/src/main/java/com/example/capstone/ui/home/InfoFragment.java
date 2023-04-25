@@ -35,6 +35,8 @@ public class InfoFragment extends Fragment {
 
     private Button continueButton;
 
+    private Button quitButton;
+
     private int count = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -157,6 +159,24 @@ public class InfoFragment extends Fragment {
             }
         });
 
+        quitButton = root.findViewById(R.id.quitButton);
+
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String completed = "tour done";
+                HomeFragment homeFragment = new HomeFragment();
+                Bundle completedTour = new Bundle();
+                completedTour.putString("Finished",completed);
+                homeFragment.setArguments(completedTour);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, homeFragment);
+                fragmentTransaction.setReorderingAllowed(true);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
 
         return root;
