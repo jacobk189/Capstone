@@ -84,7 +84,8 @@ public class InfoFragment extends Fragment {
         information = root.findViewById(R.id.Info);
         String info = tourList.get(count).getInfo();
         String address = tourList.get(count).getAddress();
-        String fullInfo = info + "\n\nAddress: " + address;
+        String nickName = tourList.get(count).getNickname();
+        String fullInfo = info + "\n\nAddress: " + address + "\n\nAlso Known As: " + nickName;
         information.setText(fullInfo);
 
         history = root.findViewById(R.id.History);
