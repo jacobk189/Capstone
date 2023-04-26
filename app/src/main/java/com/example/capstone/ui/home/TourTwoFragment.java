@@ -139,17 +139,14 @@ public class TourTwoFragment extends Fragment {
                     Log.d("something wrong with location access", "here");
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
-            }
-        }));
-
-        /*googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
 
                         Bundle tourOne = new Bundle();
                         tourOne.putInt("Tour counter",count);
-                        tourOne.putParcelableArrayList("tourList", (ArrayList<? extends Parcelable>) new ArrayList<BuildingModel>(academicTour));
-                        tourOne.putInt("tourType", 1);
+                        tourOne.putParcelableArrayList("tourList", (ArrayList<? extends Parcelable>) new ArrayList<BuildingModel>(livingAreasTour));
+                        tourOne.putInt("tourType", 2);
 
                         InfoFragment infoFragment = new InfoFragment();
                         infoFragment.setArguments(tourOne);
@@ -160,9 +157,12 @@ public class TourTwoFragment extends Fragment {
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
 
-
                     }
-                });*/
+                });
+            }
+        }));
+
+
 
         return root;
     }

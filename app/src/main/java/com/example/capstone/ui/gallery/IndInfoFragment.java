@@ -96,7 +96,13 @@ public class IndInfoFragment extends Fragment {
         information = root.findViewById(R.id.Info);
         history = root.findViewById(R.id.History);
 
-        information.setText(currentBuilding.getInfo());
+        information = root.findViewById(R.id.Info);
+        String info = currentBuilding.getInfo();
+        String address = currentBuilding.getAddress();
+        String nickName = currentBuilding.getNickname();
+        String fullInfo = info + "\n\nAddress: " + address + "\n\nAlso Known As: " + nickName;
+        information.setText(fullInfo);
+
         history.setText(currentBuilding.getHistory());
 
         continueButton = root.findViewById(R.id.continueButton);

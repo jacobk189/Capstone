@@ -6,16 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.gallery.GalleryFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/newknightlogo"
+        android:backgroundTint="#40FFFFFF"
+        android:gravity="center"
+        android:layout_marginLeft="40dp">
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/BuildingName"
-        android:layout_width="317dp"
-        android:layout_height="189dp"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Info page"
         android:textColor="@color/text"
         android:textSize="30sp"
         android:textStyle="bold"
         android:typeface="serif"
+        android:elevation="10dp"
+        android:background="@color/appbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +39,9 @@
         android:id="@+id/galleryimage"
         android:layout_width="404dp"
         android:layout_height="222dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:scaleType="centerInside"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +53,7 @@
         android:id="@+id/Information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="Information"
         app:backgroundTint="@color/appbar"
         android:textColor="@color/text"
@@ -56,7 +70,7 @@
         android:id="@+id/Directions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="Directions"
         android:textColor="@color/text"
         android:textStyle="bold"

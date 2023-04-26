@@ -20,6 +20,7 @@
 
             <TextView
                 android:id="@+id/Name"
+                android:elevation="10dp"
                 android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -37,25 +38,28 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.026" />
 
+
             <ImageView
                 android:id="@+id/tourimage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="60dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/sncknightlogo" />
+
 
             <TextView
                 android:id="@+id/infotitle"
                 android:layout_width="264dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="60dp"
                 android:gravity="center"
                 android:text="Important Information"
-                android:textColor="@color/text"
+                android:textColor="#006400"
                 android:background="@color/appbar"
+                android:elevation="10dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:typeface="serif"
@@ -72,10 +76,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@color/appbar"
-                android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:text="TextView"
                 android:textColor="@color/text"
+                android:elevation="10dp"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="serif"
@@ -90,14 +94,15 @@
                 android:id="@+id/historytitle"
                 android:layout_width="137dp"
                 android:layout_height="26dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="60dp"
                 android:gravity="center"
                 android:text="History"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/text"
+                android:textColor="#006400"
                 android:background="@color/appbar"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:elevation="10dp"
                 android:typeface="serif"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -112,9 +117,9 @@
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"
                 android:text="TextView"
-                android:gravity="center"
                 android:textColor="@color/text"
                 android:background="@color/appbar"
+                android:elevation="10dp"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="serif"
@@ -130,7 +135,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:layout_marginTop="15dp">
 
                 <Button
                     android:id="@+id/quitButton"

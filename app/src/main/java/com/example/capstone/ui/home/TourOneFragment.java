@@ -147,7 +147,7 @@ public class TourOneFragment extends Fragment {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
 
-                /*googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
 
@@ -167,7 +167,7 @@ public class TourOneFragment extends Fragment {
 
 
                     }
-                });*/
+                });
             }
         }));
 

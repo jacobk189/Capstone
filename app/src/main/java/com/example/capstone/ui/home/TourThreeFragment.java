@@ -93,7 +93,7 @@ public class TourThreeFragment extends Fragment {
 
         //List<BuildingModel> academicTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
         Log.d("checking count ", "akdsflkhadslkfj:"+count);
-        ArrayList<BuildingModel> areasofInterestTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(18), buildingList.get(19), buildingList.get(7), buildingList.get(3), buildingList.get(22)));
+        ArrayList<BuildingModel> areasofInterestTour = new ArrayList<>(Arrays.asList(buildingList.get(28), buildingList.get(15), buildingList.get(14), buildingList.get(10), buildingList.get(6), buildingList.get(23), buildingList.get(26)));
 
         String apiKey = getString(R.string.google_maps_key);
 
@@ -112,8 +112,8 @@ public class TourThreeFragment extends Fragment {
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), areasofInterestTour, 3);
-                    //MyLocationListener locationListener = new MyLocationListener(requireContext(), livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), areasofInterestTour, 3);
+                    //MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), areasofInterestTour, 3);
+                    MyLocationListener locationListener = new MyLocationListener(requireContext(), areasofInterestTour.get(count).getLatitude(), areasofInterestTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), areasofInterestTour, 3);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
                     Log.d("My Location", myLocation.toString());
@@ -140,6 +140,27 @@ public class TourThreeFragment extends Fragment {
                     Log.d("something wrong with location access", "here");
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(@NonNull LatLng latLng) {
+
+                        Bundle tourOne = new Bundle();
+                        tourOne.putInt("Tour counter",count);
+                        tourOne.putParcelableArrayList("tourList", (ArrayList<? extends Parcelable>) new ArrayList<BuildingModel>(areasofInterestTour));
+                        tourOne.putInt("tourType", 3);
+
+                        InfoFragment infoFragment = new InfoFragment();
+                        infoFragment.setArguments(tourOne);
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, infoFragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+
+
+                    }
+                });
             }
         }));
 
