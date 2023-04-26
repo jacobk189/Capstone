@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.gallery.GalleryFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/newknightlogo"
+        android:backgroundTint="#40FFFFFF"
+        android:gravity="center"
+        android:layout_marginLeft="40dp">
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/BuildingName"
         android:layout_width="380dp"
