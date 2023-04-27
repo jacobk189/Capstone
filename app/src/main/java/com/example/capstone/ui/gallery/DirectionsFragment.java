@@ -38,6 +38,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -134,6 +135,8 @@ public class DirectionsFragment extends Fragment {
                         Log.d("Inside location not null", "here");
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         LatLng destination = new LatLng(currentBuilding.getLatitude(), currentBuilding.getLongitude());
+                        MarkerOptions markerOptions = new MarkerOptions().position(destination).title("Marker Title");
+                        googleMap.addMarker(markerOptions);
                         //LatLng destination = new LatLng(44.44467309202324, -88.07074847846474);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());

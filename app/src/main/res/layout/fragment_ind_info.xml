@@ -72,10 +72,11 @@
 
             <TextView
                 android:id="@+id/Info"
-                android:layout_width="411dp"
+                android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="TextView"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/text"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -111,10 +112,11 @@
 
             <TextView
                 android:id="@+id/History"
-                android:layout_width="match_parent"
+                android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="TextView"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/text"
                 android:textSize="15sp"
                 android:textStyle="bold"

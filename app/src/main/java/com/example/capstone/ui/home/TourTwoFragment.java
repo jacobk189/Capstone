@@ -35,6 +35,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -125,6 +126,8 @@ public class TourTwoFragment extends Fragment {
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         LatLng destination = new LatLng(livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude());
                         //LatLng destination = new LatLng(44.444648402445374, -88.07028337312235);
+                        MarkerOptions markerOptions = new MarkerOptions().position(destination).title("Marker Title");
+                        googleMap.addMarker(markerOptions);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
 
