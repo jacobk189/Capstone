@@ -1,18 +1,11 @@
 package com.example.capstone.ui.home;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.Manifest;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -21,10 +14,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,33 +22,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.capstone.BluetoothReceiver;
-import com.example.capstone.BuildingDB;
-import com.example.capstone.BuildingModel;
 import com.example.capstone.R;
 import com.example.capstone.databinding.FragmentHomeBinding;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
 
-import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
-
-import java.util.List;
 import java.util.Set;
 
 public class HomeFragment extends Fragment {
@@ -91,18 +66,6 @@ public class HomeFragment extends Fragment {
 
     IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 
-    private BluetoothReceiver bluetoothReceiver;
-
-    /*private final ActivityResultLauncher<String[]> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), permissions -> {
-                if (permissions.get(Manifest.permission.BLUETOOTH_ADMIN)) {
-                    // Permission is granted, start discovery
-                    bluetoothAdapter.startDiscovery();
-                } else {
-                    // Permission is not granted, show a message to the user
-                    Toast.makeText(getContext(), "Bluetooth permission denied", Toast.LENGTH_SHORT).show();
-                }
-            });*/
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -135,7 +98,7 @@ public class HomeFragment extends Fragment {
         youtube = root.findViewById(R.id.youtube);
         RoundImage(youtube, getResources().getDrawable(R.drawable.realyoutube), 500, 500);
 
-
+        //Changes the toolbar name back to home after going through any of the tours
         if (getArguments() != null) {
             Log.d("Inside get arugment not null", "");
             Fragment callingFragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
@@ -148,10 +111,9 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        bluetoothReceiver = new BluetoothReceiver();
-        getActivity().registerReceiver(bluetoothReceiver, filter);
-
         Log.d("&&&&&&&&&", "inside of homefragment 2");
+
+        //Listeners for all of the tour buttons, each one will open the correct tour fragment and open a dialog box making sure the user is ready to take the tour
 
         tourOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,6 +195,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //listeners that handle and open all the correct links for st norberts social media
         tiktok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -269,6 +232,8 @@ public class HomeFragment extends Fragment {
     }
 
     public void RoundImage(ImageView imageView, Drawable drawable, int rx, int ry){
+
+        //Rounds the social media links
 
         Bitmap mMap = ((BitmapDrawable) drawable).getBitmap();
         Bitmap mRounded = Bitmap.createBitmap(mMap.getWidth(), mMap.getHeight(), mMap.getConfig());

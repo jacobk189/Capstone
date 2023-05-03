@@ -14,6 +14,8 @@ import com.example.capstone.ui.home.HomeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+//Set up database for project to handle everything correctly
+
 public class BuildingDB extends SQLiteOpenHelper {
 
     public static final String BUILDING_TABLE = "BUILDING_TABLE";
