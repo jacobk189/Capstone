@@ -67,6 +67,7 @@ public class TourTwoFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_tour_one, container, false);
         FrameLayout mapContainer = root.findViewById(R.id.m_container);
 
+        //get map support
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.m_container);
         if (supportMapFragment == null) {
             supportMapFragment = SupportMapFragment.newInstance();
@@ -75,9 +76,11 @@ public class TourTwoFragment extends Fragment {
 
         Log.d("&&&&&&&&&", "inside of tourtwofragment");
 
+        //set tool bar name correctly
         androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Living Areas");
 
+        //get arguments from the information page which updates the count to make sure that the next building in the tour is being used
         if (getArguments() != null) {
             Log.d("Inside get arugment not null", "");
             Fragment callingFragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
@@ -89,14 +92,15 @@ public class TourTwoFragment extends Fragment {
             }
         }
 
+        //make database then set all database info to a list of buildingmodel so that you can use accessors
         BuildingDB buildingDB = new BuildingDB(TourTwoFragment.this);
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
-        Log.d("checking count ", "akdsflkhadslkfj:"+count);
+        //create the tour with the correct buildings
         ArrayList<BuildingModel> livingAreasTour = new ArrayList<>(Arrays.asList(buildingList.get(2), buildingList.get(1), buildingList.get(0), buildingList.get(5), buildingList.get(12), buildingList.get(11), buildingList.get(16)));
 
+        //set api correctly
         String apiKey = getString(R.string.google_maps_key);
-
         GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey(apiKey).build();
 
         supportMapFragment.getMapAsync((new OnMapReadyCallback() {
@@ -106,13 +110,16 @@ public class TourTwoFragment extends Fragment {
                 mMap = googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+                //make sure the app has location permitions from the user
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     // Permission is granted, get the user's current location
                     googleMap.setMyLocationEnabled(true);
+
+                    //create location manager and receive users location
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    //MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
+                    //set up the lcoation listener class then use locationmanager to continuously get location updates on the user
                     MyLocationListener locationListener = new MyLocationListener(requireContext(), livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude(), "Tour", count, locationManager, getParentFragmentManager(), livingAreasTour, 2);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
@@ -120,17 +127,22 @@ public class TourTwoFragment extends Fragment {
 
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 16));
 
+                    //checking if location is null or not
                     if (myLocation != null) {
                         // Use the user's current location to set the origin of the directions request
                         Log.d("Inside location not null", "here");
+
+                        //get the origin and destination for this instances directions
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         LatLng destination = new LatLng(livingAreasTour.get(count).getLatitude(), livingAreasTour.get(count).getLongitude());
-                        //LatLng destination = new LatLng(44.444648402445374, -88.07028337312235);
+
+                        //set marker at the destination location
                         MarkerOptions markerOptions = new MarkerOptions().position(destination).title("Marker Title");
                         googleMap.addMarker(markerOptions);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
 
+                        //run the get directions method
                         getDirections(origin, destination, googleMap);
 
                     } else {
@@ -142,6 +154,8 @@ public class TourTwoFragment extends Fragment {
                     Log.d("something wrong with location access", "here");
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
+
+                //used for demo purposes, lets you click on the map to go through the tour
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {
@@ -208,6 +222,7 @@ public class TourTwoFragment extends Fragment {
                         directions = path;
                         Log.d("directions contents in function" , directions.toString());
 
+                        //run back on main thread so that you are able to add the directions line to the map
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

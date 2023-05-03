@@ -3,6 +3,8 @@ package com.example.capstone;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+//Create building model so that you can load all database info into a list of building model
+
 public class BuildingModel implements Parcelable {
 
     private int ID;

@@ -53,15 +53,14 @@ public class InfoFragment extends Fragment {
         Log.d("&&&&&&&&&", "inside of infofragment");
 
 
-
+        //get arguments from tour fragment so we know which tour is being ran and which part of the tour we are on
         Bundle receive = getArguments();
-        //assert receive != null;
         count = receive.getInt("Tour counter");
         int tourType = receive.getInt("tourType");
-        //Toast.makeText(getContext(), "This is the count: "+count, Toast.LENGTH_SHORT).show();
 
         androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
 
+        //setting toolbar name depending on which tour the user is running
         if (tourType == 1){
             toolbar.setTitle("Academics");
         }
@@ -72,15 +71,18 @@ public class InfoFragment extends Fragment {
             toolbar.setTitle("Areas of Interest");
         }
 
+        //receving the tour list from the tour fragment
         List<BuildingModel> tourList = receive.getParcelableArrayList("tourList");
 
         buildingName = root.findViewById(R.id.Name);
         buildingName.setText(tourList.get(count).getName());
 
+
         image = root.findViewById(R.id.tourimage);
         int imageResourceId = getResources().getIdentifier("_" + tourList.get(count).getID() + "_image", "drawable", getActivity().getPackageName());
         image.setImageResource(imageResourceId);
 
+        //getting right information for the building and displaying it to the screen
         information = root.findViewById(R.id.Info);
         String info = tourList.get(count).getInfo();
         String address = tourList.get(count).getAddress();
@@ -94,10 +96,12 @@ public class InfoFragment extends Fragment {
         continueButton = root.findViewById(R.id.continueButton);
         int nextCount = count + 1;
 
+        //changing continue button to say finish if on last part of tour
         if (nextCount >= tourList.size()){
             continueButton.setText("Finish");
         }
 
+        //listener for the continue button
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +109,7 @@ public class InfoFragment extends Fragment {
                 Log.d("List size", String.valueOf(tourList.size()));
                 Log.d("Next count", String.valueOf(nextCount));
 
+                //if tour is finished then directback to home fragment if finsih is clicked
                 if (nextCount >= tourList.size()){
                     count = 0;
                     String completed = "Academic Tour Completed";
@@ -123,6 +128,7 @@ public class InfoFragment extends Fragment {
                     Bundle count = new Bundle();
                     count.putInt("Next Count", nextCount);
 
+                    //checking which tour you are doing so it knows which fragment to return to when clicking continue
                     if (tourType == 1){
                         TourOneFragment tourOneFragment = new TourOneFragment();
                         tourOneFragment.setArguments(count);
@@ -162,6 +168,7 @@ public class InfoFragment extends Fragment {
 
         quitButton = root.findViewById(R.id.quitButton);
 
+        //quit button listener that will bring you back to the home fragment
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
