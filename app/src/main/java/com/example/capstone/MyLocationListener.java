@@ -41,16 +41,18 @@ public class MyLocationListener implements LocationListener {
         this.type = type;
     }
 
+    //anytime the users coordinates change at all this method is ran
     @Override
     public void onLocationChanged(Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-        //Toast.makeText(context, "Latitude: " + latitude + " Longitude: " + longitude, Toast.LENGTH_SHORT).show();
 
         float[] distance = new float[1];
+
+        //check if the user is within 25 meters of the destination
         Location.distanceBetween(latitude, longitude, destLatitude, destLongitude, distance);
         if (distance[0] <= 25) { // distance in meters
-            // open new fragment
+            // open new fragment based on which fragment id was passed to the class
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             switch (fragmentId) {
                 case "Gallery":
@@ -68,6 +70,7 @@ public class MyLocationListener implements LocationListener {
                     Bundle tourCounter = new Bundle();
                     tourCounter.putInt("Tour counter", id);
                     tourCounter.putParcelableArrayList("tourList", (ArrayList<? extends Parcelable>) new ArrayList<BuildingModel>(tour));
+                    //checking which tour is being ran
                     if (type == 1){
                         tourCounter.putInt("tourType", 1);
                     }

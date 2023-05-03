@@ -72,6 +72,7 @@ public class DirectionsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_directions, container, false);
         FrameLayout mapContainer = root.findViewById(R.id.m_container);
 
+        //get map support
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.m_container);
         if (supportMapFragment == null) {
             supportMapFragment = SupportMapFragment.newInstance();
@@ -80,6 +81,7 @@ public class DirectionsFragment extends Fragment {
 
         Log.d("&&&&&&&&&", "inside of directions fragment");
 
+        //get arguments from the information page which updates the count to make sure that the correct building is still being displayed
         if (getArguments() != null) {
             Log.d("Inside get arugment not null", "");
             Fragment callingFragment = getParentFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
@@ -92,21 +94,25 @@ public class DirectionsFragment extends Fragment {
             }
         }
 
+        //make database then set all database info to a list of buildingmodel so that you can use accessors
         BuildingDB buildingDB = new BuildingDB(com.example.capstone.ui.gallery.DirectionsFragment.this);
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
+        //searching through the building list to see which building Id matches the id we need to display
+        //once found we set a new building model object to that specific building so we can get its information
         for (BuildingModel building : buildingList) {
             if (building.getID() == buildingNumber) {
                 currentBuilding = building;
                 break;
             }
         }
+
+        //set toolbar correctly
         androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(""+currentBuilding.getName());
 
-
+        //set api correctly
         String apiKey = getString(R.string.google_maps_key);
-
         GeoApiContext geoApiContext = new GeoApiContext.Builder().apiKey(apiKey).build();
 
         supportMapFragment.getMapAsync((new OnMapReadyCallback() {
@@ -119,10 +125,12 @@ public class DirectionsFragment extends Fragment {
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     // Permission is granted, get the user's current location
                     googleMap.setMyLocationEnabled(true);
+
+                    //create location manager and receive users location
                     LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                    //MyLocationListener locationListener = new MyLocationListener(requireContext(),44.44467309202324, -88.07074847846474, "Gallery", currentBuilding.getID(), locationManager, getParentFragmentManager(), null, 0);
+                    //set up the lcoation listener class then use locationmanager to continuously get location updates on the user
                     MyLocationListener locationListener = new MyLocationListener(requireContext(),currentBuilding.getLatitude(), currentBuilding.getLongitude(), "Gallery", currentBuilding.getID(), locationManager, getParentFragmentManager(), null, 0);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
@@ -130,17 +138,22 @@ public class DirectionsFragment extends Fragment {
 
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 16));
 
+                    //checking if location is null or not
                     if (myLocation != null) {
                         // Use the user's current location to set the origin of the directions request
                         Log.d("Inside location not null", "here");
+
+                        //get the origin and destination for this instances directions
                         LatLng origin = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                         LatLng destination = new LatLng(currentBuilding.getLatitude(), currentBuilding.getLongitude());
+
+                        //set marker at the destination location
                         MarkerOptions markerOptions = new MarkerOptions().position(destination).title("Marker Title");
                         googleMap.addMarker(markerOptions);
-                        //LatLng destination = new LatLng(44.44467309202324, -88.07074847846474);
                         Log.d("Your Location", origin.toString());
                         Log.d("Your destination", "Coordinates: " + destination + " Building name: " + buildingList.get(1).getName());
 
+                        //run the get directions method
                         getDirections(origin, destination, googleMap);
 
                     } else {
@@ -152,6 +165,7 @@ public class DirectionsFragment extends Fragment {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
 
+                //used for demo purposes, lets you click on the map to go through the tour
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng latLng) {

@@ -42,12 +42,12 @@ public class GalleryFragment extends Fragment {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //setting background color
         root.setBackgroundColor(getResources().getColor(R.color.background));
 
 
-
+        //getting correct building id
         if (getArguments() != null) {
-
             if(getArguments().containsKey("building_number")){
                 String ID = getArguments().getString("building_number");
                 buildingNumber = Integer.parseInt(ID);
@@ -59,9 +59,11 @@ public class GalleryFragment extends Fragment {
             }
         }
 
+        //making building database and the list of buildings
         BuildingDB buildingDB = new BuildingDB(GalleryFragment.this);
         List<BuildingModel> buildingList = buildingDB.showbuildings();
 
+        //match the correct building id to the correct building and set it to the current building object
         for (BuildingModel building : buildingList) {
             if (building.getID() == buildingNumber) {
                 currentBuilding = building;
@@ -69,12 +71,14 @@ public class GalleryFragment extends Fragment {
             }
         }
 
+        //set tool bar title
         androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(""+currentBuilding.getName());
 
         buildingName = root.findViewById(R.id.BuildingName);
         buildingName.setText(currentBuilding.getName());
 
+        //displaying correct image
         image = root.findViewById(R.id.galleryimage);
         int imageResourceId = getResources().getIdentifier("_"+currentBuilding.getID() + "_image", "drawable", getActivity().getPackageName());
         image.setImageResource(imageResourceId);
@@ -82,6 +86,7 @@ public class GalleryFragment extends Fragment {
         directionsBtn = root.findViewById(R.id.Directions);
         informationBtn = root.findViewById(R.id.Information);
 
+        //listener for the directions button the opens directionsfragment
         directionsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +105,7 @@ public class GalleryFragment extends Fragment {
             }
         });
 
+        //listener for the information bbutton which opens the indinfofragment
         informationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

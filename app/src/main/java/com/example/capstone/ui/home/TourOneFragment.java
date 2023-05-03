@@ -234,7 +234,7 @@ public class TourOneFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                PolylineOptions polylineOptions = new PolylineOptions().addAll(path).color(Color.GREEN).width(5f);
+                                PolylineOptions polylineOptions = new PolylineOptions().addAll(path).color(Color.BLUE).width(5f);
                                 googleMap.addPolyline(polylineOptions);
                                 Log.d("on directionsreceived", "2");
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 17));
